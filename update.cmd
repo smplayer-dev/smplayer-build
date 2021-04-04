@@ -1,0 +1,16 @@
+set ROOT=packages
+set WD=%cd%
+
+cd %WD%\%ROOT%\smplayer
+svn cleanup
+svn update
+
+cd %WD%\%ROOT%\smplayer-themes
+svn cleanup
+svn update
+
+cd %WD%\%ROOT%\smplayer-skins
+svn cleanup
+svn update
+
+cd %WD%
