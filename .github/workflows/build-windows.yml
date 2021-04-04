@@ -48,5 +48,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: packages/BUILD/output/
+          path: packages\BUILD\output\
           
