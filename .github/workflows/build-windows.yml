@@ -29,10 +29,13 @@ jobs:
         run: .\compile_themes.cmd
         
       - name: Compile smplayer
-        run: .\compile_smplayer.cmd
+        #run: .\compile_smplayer.cmd
+        run: echo nul > packages\smplayer\src\release\smplayer.exe
 
       - name: Install
-        run: install.cmd
+        run: |
+            .\install.cmd
+            dir packages\BUILD\
         
       - name: Create installer
         run: .\nsis.cmd
