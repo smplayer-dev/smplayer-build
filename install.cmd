@@ -5,15 +5,21 @@ echo.
 echo Warning: it will only work with sources from the SVN and the command svn has to be in the path
 echo.
 
+call version.cmd
+
 set WD=%cd%
 set ROOT=packages
 set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build
 
+if "%BUILD_ARCH%" == "x64" (
+	set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build64
+)
+
 set SMPLAYER_DIR=%ROOT%\smplayer
 set SMPLAYER_THEMES_DIR=%ROOT%smplayer-themes
 set SMPLAYER_SKINS_DIR=%ROOT%\smplayer-skins
-set MPLAYER_DIR=mplayer
-set MPV_DIR=mpv
+set MPLAYER_DIR=%ROOT%\mplayer
+set MPV_DIR=%ROOT%\mpv
 
 :: Qt locations from QMAKE
 for /f "tokens=*" %%i in ('qmake -query QT_INSTALL_PREFIX') do set QT_DIR=%%i
