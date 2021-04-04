@@ -18,8 +18,14 @@ if "%BUILD_ARCH%" == "x64" (
 set SMPLAYER_DIR=%ROOT%\smplayer
 set SMPLAYER_THEMES_DIR=%ROOT%smplayer-themes
 set SMPLAYER_SKINS_DIR=%ROOT%\smplayer-skins
+
 set MPLAYER_DIR=%ROOT%\mplayer
 set MPV_DIR=%ROOT%\mpv
+
+if "%BUILD_ARCH%" == "x64" (
+	set MPLAYER_DIR=%ROOT%\mplayer64
+	set MPV_DIR=%ROOT%\mpv64
+)
 
 :: Qt locations from QMAKE
 for /f "tokens=*" %%i in ('qmake -query QT_INSTALL_PREFIX') do set QT_DIR=%%i
