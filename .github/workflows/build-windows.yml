@@ -30,7 +30,11 @@ jobs:
         
       - name: Compile smplayer
         #run: .\compile_smplayer.cmd
-        run: echo nul > packages\smplayer\src\release\smplayer.exe
+        run: |
+            dir packages
+            dir packages\smplayer\src
+            mkdir packages\smplayer\src\release
+            echo nul > packages\smplayer\src\release\smplayer.exe
 
       - name: Install
         run: |
