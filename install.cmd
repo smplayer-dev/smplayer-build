@@ -7,7 +7,7 @@ echo.
 
 set WD=%cd%
 set ROOT=packages
-set OUTPUT_DIR=%ROOT%\smplayer-build
+set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build
 
 set SMPLAYER_DIR=%ROOT%\smplayer
 set SMPLAYER_THEMES_DIR=%ROOT%smplayer-themes
