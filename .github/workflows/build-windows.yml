@@ -47,6 +47,6 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
+          name: output
           path: packages\BUILD\output\
           
