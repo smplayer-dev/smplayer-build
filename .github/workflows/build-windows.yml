@@ -28,3 +28,12 @@ jobs:
       - name: Compile themes
         run: .\compile_themes.cmd
         
+      - name: Compile smplayer
+        run: .\compile_smplayer.cmd
+
+      - name: Install
+        run: install.cmd
+        
+      - name: Create installer
+        run: .\nsis.cmd
+        
