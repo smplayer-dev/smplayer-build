@@ -29,12 +29,12 @@ jobs:
         run: .\compile_themes.cmd
         
       - name: Compile smplayer
-        #run: .\compile_smplayer.cmd
-        run: |
-            dir packages
-            dir packages\smplayer\src
-            mkdir packages\smplayer\src\release
-            echo nul > packages\smplayer\src\release\smplayer.exe
+        run: .\compile_smplayer.cmd
+        #run: |
+        #    dir packages
+        #    dir packages\smplayer\src
+        #    mkdir packages\smplayer\src\release
+        #    echo nul > packages\smplayer\src\release\smplayer.exe
 
       - name: Install
         run: |
