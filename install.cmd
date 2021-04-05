@@ -11,12 +11,8 @@ set WD=%cd%
 set ROOT=packages
 set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build
 
-if "%BUILD_ARCH%" == "x64" (
-	set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build64
-)
-
 set SMPLAYER_DIR=%ROOT%\smplayer
-set SMPLAYER_THEMES_DIR=%ROOT%smplayer-themes
+set SMPLAYER_THEMES_DIR=%ROOT%\smplayer-themes
 set SMPLAYER_SKINS_DIR=%ROOT%\smplayer-skins
 
 set MPLAYER_DIR=%ROOT%\mplayer
