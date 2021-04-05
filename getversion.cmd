@@ -16,7 +16,11 @@ if "%svn_revision%"=="" (
 )
 echo.
 
-echo #define SVN_REVISION "%svn_revision%">src\svn_revision.h
+set ALL_PKG_VER=
+set VER_MAJOR=
+set VER_MINOR=
+set VER_BUILD=
+set VER_REVISION=
 
 :: Get values of USE_SVN_VERSIONS & DEVELOPMENT_VERSION & VERSION
 for /f "tokens=3" %%j in ('type src\version.cpp ^| find /I "#define USE_SVN_VERSIONS"') do set use_svn_versions=%%j
