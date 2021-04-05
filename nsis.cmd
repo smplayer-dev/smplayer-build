@@ -14,6 +14,10 @@ set ROOT=packages
 set BUILD_DIR=%ROOT%\BUILD
 set WD=%cd%
 
+cd %ROOT%\smplayer\
+call %WD%\getversion.cmd
+cd %WD%
+
 mkdir "%BUILD_DIR%\translations"
 mkdir "%BUILD_DIR%\output"
 copy "%ROOT%\smplayer\setup\translations\*.*" "%BUILD_DIR%\translations"
