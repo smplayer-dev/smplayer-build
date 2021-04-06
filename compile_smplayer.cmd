@@ -1,10 +1,9 @@
 rem @echo off
 
-call version.cmd
-
 set WD=%cd%
 set ROOT=packages
 
-cd %ROOT%\smplayer
+cd %ROOT%\smplayer\
+call %WD%\getversion.cmd
 call compile_windows.cmd nosmtube
 cd %WD%

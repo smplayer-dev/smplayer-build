@@ -54,11 +54,6 @@ if defined version_cpp (
   )
 )
 
-set svn_revision=
-set development_version=
-set use_svn_versions=
-set version_cpp=
-
 :parse_version
 for /f "tokens=1 delims=." %%j in ("%ALL_PKG_VER%")  do set VER_MAJOR=%%j
 for /f "tokens=2 delims=." %%k in ("%ALL_PKG_VER%")  do set VER_MINOR=%%k

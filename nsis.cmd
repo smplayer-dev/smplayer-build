@@ -1,14 +1,4 @@
-rem @echo off
-
-call version.cmd
-
-rem set DEF_QT5=
-set DEF_QT5=/DQT5
-
-set DEF_ARCH=
-if "%BUILD_ARCH%" == "x64" (
-  set DEF_ARCH=/DWIN64
-)
+@echo off
 
 set ROOT=packages
 set BUILD_DIR=%ROOT%\BUILD
@@ -17,6 +7,12 @@ set WD=%cd%
 cd %ROOT%\smplayer\
 call %WD%\getversion.cmd
 cd %WD%
+
+set DEF_QT5=/DQT5
+set DEF_ARCH=
+if "%BUILD_ARCH%" == "x64" (
+  set DEF_ARCH=/DWIN64
+)
 
 mkdir "%BUILD_DIR%\translations"
 mkdir "%BUILD_DIR%\output"
