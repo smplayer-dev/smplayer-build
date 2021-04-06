@@ -90,12 +90,19 @@ if defined VER_REVISION (
   set VER_REV_CMD=
 )
 
+:: GCC Target
+set BUILD_ARCH=win32
+for /f "usebackq tokens=2" %%i in (`"gcc -v 2>&1 | find "Target""`) do set gcc_target=%%i
+if [%gcc_target%]==[x86_64-w64-mingw32] (
+  set BUILD_ARCH=x64
+)
+
 @echo on
 echo VERSION: %ALL_PKG_VER%
 echo VER_MAJOR: %VER_MAJOR%
 echo VER_MINOR: %VER_MINOR%
 echo VER_BUILD: %VER_BUILD%
 echo VER_REVISION: %VER_REVISION%
-
+echo BUILD_ARCH: %BUILD_ARCH%
 
 
