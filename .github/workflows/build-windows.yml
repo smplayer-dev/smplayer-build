@@ -45,9 +45,11 @@ jobs:
       - name: Create installer
         run: |
            .\nsis.cmd
-           $env:INSTALLERFILENAME
-           gci env:
-           type installer_filename.txt
+           #$env:INSTALLERFILENAME
+           #gci env:
+           type packages\BUILD\installer_filename.txt
+           $filename = Get-Content packages\BUILD\installer_filename.txt -Raw
+           echo $filename
         #env:
         #  INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
         
