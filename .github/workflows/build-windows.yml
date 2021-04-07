@@ -48,8 +48,8 @@ jobs:
            #$env:INSTALLERFILENAME
            #gci env:
            type packages\BUILD\installer_filename.txt
-           $filename = Get-Content packages\BUILD\installer_filename.txt -Raw
-           echo filename: $filename
+           $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
+           #echo filename: $filename
            echo "{INSTALLERFILENAME}={$filename}"
            echo "{INSTALLERFILENAME}={$filename}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         #env:
