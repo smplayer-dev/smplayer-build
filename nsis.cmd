@@ -41,4 +41,6 @@ if %VER_REVISION% neq 0 (
 ) else (
 	set VERSION=%VER_MAJOR%.%VER_MINOR%.%VER_BUILD%
 )
-set OUTPUTFILE=%BUILD_DIR%\output\smplayer-%VERSION%-%BUILD_ARCH%.exe
+set INSTALLERFILE=%BUILD_DIR%\output\smplayer-%VERSION%-%BUILD_ARCH%.exe
+echo %INSTALLERFILE%
+

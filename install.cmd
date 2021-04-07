@@ -1,15 +1,23 @@
 @echo off
-echo This batch file can help you to create a directory with all required files
-echo Just change the variables at the beginning
-echo.
-echo Warning: it will only work with sources from the SVN and the command svn has to be in the path
-echo.
+
+set build_portable=false
+if [%1]==[pe] (
+  set build_portable=true
+)
 
 set WD=%cd%
 set ROOT=packages
-set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build
 
-set SMPLAYER_DIR=%ROOT%\smplayer
+if [%build_portable%]==[true] (
+  echo Installing portable version...
+  set OUTPUT_DIR=%ROOT%\BUILD\smplayer-portable-build
+  set SMPLAYER_DIR=%ROOT%\smplayer-portable
+) else (
+   echo Installing normal version...
+  set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build
+  set SMPLAYER_DIR=%ROOT%\smplayer
+)
+
 set SMPLAYER_THEMES_DIR=%ROOT%\smplayer-themes
 set SMPLAYER_SKINS_DIR=%ROOT%\smplayer-skins
 
