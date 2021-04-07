@@ -46,6 +46,8 @@ jobs:
         run: |
            .\nsis.cmd
            $env:INSTALLERFILENAME
+        env:
+          INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
         
       - name: Create artifact
         uses: actions/upload-artifact@v2
