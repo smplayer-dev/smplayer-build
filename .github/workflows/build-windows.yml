@@ -46,7 +46,7 @@ jobs:
         run: |
            .\nsis.cmd
            $env:INSTALLERFILENAME
-           set
+           $env
         env:
           INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
         
@@ -55,4 +55,3 @@ jobs:
         with:
           name: ${{ env.INSTALLERFILENAME }}
           path: packages\BUILD\output\${{ env.INSTALLERFILENAME }}
-          
