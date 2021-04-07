@@ -27,16 +27,9 @@ jobs:
         
       - name: Compile smplayer
         run: .\compile_smplayer.cmd
-        #run: |
-        #    #dir packages
-        #    #dir packages\smplayer\src
-        #    mkdir packages\smplayer\src\release
-        #    echo nul > packages\smplayer\src\release\smplayer.exe
 
       - name: Install
-        run: |
-            .\install.cmd
-            dir packages\BUILD\
+        run: .\install.cmd
         
       - name: Create installer
         run: |
