@@ -1,6 +1,4 @@
-rem @echo off
-
-call version.cmd
+@echo off
 
 set WD=%cd%
 set ROOT=packages
