@@ -18,16 +18,16 @@ jobs:
       #- name: List
       #  run: dir packages
       
-      #- name: Install Qt
-      #  uses: jurplel/install-qt-action@v2
-      #  with:
-      #    arch: 'win64_mingw81'
-      #    tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
-      #    #tools: 'tools_openssl_x86,1.1.1-1,qt.tools.openssl.win_x86'
-      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          arch: 'win64_mingw81'
+          tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
+          #tools: 'tools_openssl_x86,1.1.1-1,qt.tools.openssl.win_x86'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
           
-      #- name: Compile themes
-      #  run: .\compile_themes.cmd
+      - name: Compile themes
+        run: .\compile_themes.cmd
         
       - name: Compile smplayer
         #run: .\compile_smplayer.cmd
