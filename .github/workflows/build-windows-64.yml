@@ -1,10 +1,7 @@
-name: Build SMPlayer on Windows
+name: Build SMPlayer 64 bits on Windows
 
-# Controls when the action will run. 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
     runs-on: windows-latest
@@ -14,9 +11,6 @@ jobs:
       
       - name: Install sources
         run: .\download_packages.cmd
-      
-      #- name: List
-      #  run: dir packages
       
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
