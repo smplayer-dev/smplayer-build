@@ -48,8 +48,8 @@ jobs:
            #$env:INSTALLERFILENAME
            #$env
            gci env:
-        env:
-          INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
+        #env:
+        #  INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
         
       - name: Create artifact
         uses: actions/upload-artifact@v2
