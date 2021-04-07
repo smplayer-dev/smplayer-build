@@ -45,8 +45,9 @@ jobs:
       - name: Create installer
         run: |
            .\nsis.cmd
-           $env:INSTALLERFILENAME
-           $env
+           #$env:INSTALLERFILENAME
+           #$env
+           gci env:
         env:
           INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
         
