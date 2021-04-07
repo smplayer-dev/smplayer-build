@@ -92,7 +92,6 @@ if [%gcc_target%]==[x86_64-w64-mingw32] (
   set BUILD_ARCH=x64
 )
 
-@echo on
 echo VERSION: %ALL_PKG_VER%
 echo VER_MAJOR: %VER_MAJOR%
 echo VER_MINOR: %VER_MINOR%
