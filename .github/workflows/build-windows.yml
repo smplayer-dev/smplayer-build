@@ -47,6 +47,6 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ INSTALLERFILENAME }}
-          path: packages\BUILD\output\${{ INSTALLERFILENAME }}
+          name: ${{ env.INSTALLERFILENAME }}
+          path: packages\BUILD\output\${{ env.INSTALLERFILENAME }}
           
