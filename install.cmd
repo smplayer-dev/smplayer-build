@@ -5,8 +5,6 @@ echo.
 echo Warning: it will only work with sources from the SVN and the command svn has to be in the path
 echo.
 
-call version.cmd
-
 set WD=%cd%
 set ROOT=packages
 set OUTPUT_DIR=%ROOT%\BUILD\smplayer-build
@@ -17,6 +15,10 @@ set SMPLAYER_SKINS_DIR=%ROOT%\smplayer-skins
 
 set MPLAYER_DIR=%ROOT%\mplayer
 set MPV_DIR=%ROOT%\mpv
+
+cd %SMPLAYER_DIR%
+call %WD%\getversion.cmd
+cd %WD%
 
 if "%BUILD_ARCH%" == "x64" (
 	set MPLAYER_DIR=%ROOT%\mplayer64
