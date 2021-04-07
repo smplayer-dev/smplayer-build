@@ -44,6 +44,7 @@ if %VER_REVISION% neq 0 (
 set INSTALLERFILENAME=smplayer-%VERSION%-%BUILD_ARCH%.exe
 set INSTALLERPATH=%BUILD_DIR%\output\%INSTALLERFILENAME%
 echo %INSTALLERFILENAME%
-echo %INSTALLERFILENAME% > %BUILD_DIR%\installer_filename.txt
+rem echo %INSTALLERFILENAME% > %BUILD_DIR%\installer_filename.txt
+echo|set /p=%INSTALLERFILENAME%>%BUILD_DIR%\installer_filename.txt
 
 
