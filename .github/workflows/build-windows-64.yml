@@ -17,24 +17,15 @@ jobs:
         with:
           arch: 'win64_mingw81'
           tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
-          #tools: 'tools_openssl_x86,1.1.1-1,qt.tools.openssl.win_x86'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
           
       - name: Compile themes
         run: .\compile_themes.cmd
         
       - name: Compile smplayer
         run: .\compile_smplayer.cmd
-        #run: |
-        #    #dir packages
-        #    #dir packages\smplayer\src
-        #    mkdir packages\smplayer\src\release
-        #    echo nul > packages\smplayer\src\release\smplayer.exe
 
       - name: Install
-        run: |
-            .\install.cmd
-            dir packages\BUILD\
+        run: .\install.cmd
         
       - name: Create installer
         run: |
