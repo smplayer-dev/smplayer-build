@@ -47,6 +47,7 @@ jobs:
            .\nsis.cmd
            $env:INSTALLERFILENAME
            gci env:
+           type installer_filename.txt
         #env:
         #  INSTALLERFILENAME: ${{ env.INSTALLERFILENAME }}
         
