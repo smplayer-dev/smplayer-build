@@ -1,2 +1,2 @@
 # smplayer-build
-Scripts to build smplayer
+Scripts and files to build SMPlayer on Windows
