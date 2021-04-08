@@ -36,4 +36,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: output.zip
-          path: packages\packages\smtube\setup\output\
+          path: packages\smtube\setup\output\
