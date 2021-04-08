@@ -32,3 +32,8 @@ jobs:
       - name: Build smtube
         run: .\build_smtube.cmd
         
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: output.zip
+          path: packages\packages\smtube\setup\output\
