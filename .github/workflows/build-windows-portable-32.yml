@@ -1,0 +1,44 @@
+name: Build SMPlayer Portable 32 bits on Windows
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Install sources
+        run: .\download_packages.cmd
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.2'
+          arch: 'win32_mingw81'
+          tools: 'tools_openssl_x86,1.1.1-1,qt.tools.openssl.win_x86'
+ 
+      - name: Set mingw32 path
+        run: echo "c:\msys64\mingw32\bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        
+      - name: Compile themes
+        run: .\compile_themes.cmd
+        
+      - name: Compile smplayer
+        run: .\compile_smplayer.cmd pe
+
+      - name: Install
+        run: .\install.cmd pe
+        
+      - name: Create 7z package
+        run: |
+           .\create_portable_package.cmd
+           $filename = Get-Content packages\BUILD\portable_filename.txt -TotalCount 1
+           echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.PACKAGEFILENAME }}.zip
+          path: packages\BUILD\output\${{ env.PACKAGEFILENAME }}
