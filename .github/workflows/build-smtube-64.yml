@@ -35,5 +35,5 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: output.zip
+          name: smtube-x64
           path: packages\smtube\setup\output\
