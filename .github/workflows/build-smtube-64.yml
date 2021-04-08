@@ -1,0 +1,34 @@
+
+name: Build SMPlayer 64 bits on Windows
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Install sources
+        run: .\download_packages.cmd
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.2'
+          arch: 'win64_mingw81'
+          tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
+         
+      - name: Download QtWebkit
+        uses: suisei-cn/actions-download-file@v1
+        with:
+          url: "https://download.qt.io/snapshots/ci/qtwebkit/5.212/latest/qtwebkit/qtwebkit-Windows-Windows_10-Mingw73-Windows-Windows_10-X86_64.7z"
+          
+      - name: Extract QtWebKit
+        shell: bash
+        run: 7z x qtwebkit-Windows-Windows_10-Mingw73-Windows-Windows_10-X86_64.7z -o$Qt5_Dir
+      
+      - name: Build smtube
+        run: .\build_smtube.cmd
+        
