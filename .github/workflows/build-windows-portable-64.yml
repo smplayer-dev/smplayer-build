@@ -37,5 +37,5 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.PACKAGEFILENAME }}.zip
+          name: ${{ env.PACKAGEFILENAME }}
           path: packages\BUILD\output\${{ env.PACKAGEFILENAME }}
