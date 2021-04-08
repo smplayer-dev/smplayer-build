@@ -16,10 +16,11 @@ echo [smplayer]>> "%PORTABLE_PATH%\smplayer.ini"
 echo check_if_upgraded=false>> "%PORTABLE_PATH%\smplayer.ini"
 copy "%PORTABLE_PATH%\smplayer.ini" "%PORTABLE_PATH%\smplayer_orig.ini"
 
-set PACKAGEFILENAME=smplayer-portable-%VER_MAJOR%.%VER_MINOR%.%VER_BUILD%.%VER_REVISION%.7z
+set PACKAGEFILENAME=smplayer-portable-%VER_MAJOR%.%VER_MINOR%.%VER_BUILD%.%VER_REVISION%-%BUILD_ARCH%.7z
 
 cd %PORTABLE_PATH%
 %WD%\7za a -t7z "..\output\%PACKAGEFILENAME%" "*" -mx9
 cd %WD%
 
 echo %PACKAGEFILENAME%
+echo %PACKAGEFILENAME%>%BUILD_DIR%\portable_filename.txt
