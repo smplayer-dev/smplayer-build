@@ -1,0 +1,39 @@
+name: Build SMTube 32 bits
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Install sources
+        run: .\download_smtube.cmd
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.2'
+          arch: 'win32_mingw81'
+          #tools: 'tools_openssl_x86,1.1.1-1,qt.tools.openssl.win_x86'
+         
+      - name: Download QtWebkit
+        run: Invoke-WebRequest -Uri https://github.com/qtwebkit/qtwebkit/releases/download/qtwebkit-5.212.0-alpha4/qtwebkit-Windows-Windows_7-Mingw73-Windows-Windows_7-X86.7z -OutFile qtwebkit.7z
+
+      - name: Extract QtWebKit
+        shell: bash
+        run: 7z x qtwebkit.7z -o$Qt5_Dir
+     
+      - name: Set mingw32 path
+        run: echo "c:\msys64\mingw32\bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Build smtube
+        run: .\build_smtube.cmd
+        
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: smtube-win32
+          path: packages\smtube\setup\output\
