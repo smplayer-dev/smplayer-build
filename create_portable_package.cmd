@@ -1,3 +1,5 @@
+@echo off
+
 set ROOT=packages
 set BUILD_DIR=%ROOT%\BUILD
 set WD=%cd%
