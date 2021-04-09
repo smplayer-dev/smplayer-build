@@ -1,4 +1,4 @@
-name: Build SMPlayer Portable 32 bits on Windows
+name: Build SMPlayer Portable 32 bits
 
 on: workflow_dispatch
 
