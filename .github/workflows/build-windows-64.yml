@@ -1,4 +1,4 @@
-name: Build SMPlayer 64 bits on Windows
+name: Build SMPlayer 64 bits
 
 on: workflow_dispatch
 
