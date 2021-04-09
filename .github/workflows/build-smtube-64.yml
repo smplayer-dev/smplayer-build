@@ -23,14 +23,14 @@ jobs:
       - name: Download QtWebkit
         uses: suisei-cn/actions-download-file@v1
         with:
-          url: "https://download.qt.io/snapshots/ci/qtwebkit/5.212/latest/qtwebkit/qtwebkit-Windows-Windows_10-Mingw73-Windows-Windows_10-X86_64.7z"
+          url: "https://github.com/qtwebkit/qtwebkit/releases/download/qtwebkit-5.212.0-alpha4/qtwebkit-Windows-Windows_10-Mingw73-Windows-Windows_10-X86_64.7z"
           
       - name: Extract QtWebKit
         shell: bash
         run: 7z x qtwebkit-Windows-Windows_10-Mingw73-Windows-Windows_10-X86_64.7z -o$Qt5_Dir
      
-      - name: Set mingw64 path
-        run: echo "c:\msys64\mingw64\bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      #- name: Set mingw64 path
+      #  run: echo "c:\msys64\mingw64\bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Build smtube
         run: |
