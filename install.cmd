@@ -45,7 +45,7 @@ echo.
 mkdir %OUTPUT_DIR%
 
 copy %SMPLAYER_DIR%\src\release\smplayer.exe %OUTPUT_DIR%
-copy %SMPLAYER_DIR%\zlib\zlib1.dll %OUTPUT_DIR%
+rem copy %SMPLAYER_DIR%\zlib\zlib1.dll %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\*.txt %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\webserver\simple_web_server.exe %OUTPUT_DIR%
 
