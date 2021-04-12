@@ -27,17 +27,17 @@ jobs:
 
       - name: Compile zlib   
         run: |
-            cd smplayer\zlib
+            cd packages\smplayer\zlib
             nmake -f win32/Makefile.msc
 
       - name: Compile web server
         run: |
-            cd smplayer\webserver
+            cd packages\smplayer\webserver
             nmake -f Makefile.msc
 
       - name: Compile smplayer
         run: |
-            cd smplayer
+            cd packages\smplayer
             .\getrev.cmd
             cd src
             lrelease smplayer.pro
