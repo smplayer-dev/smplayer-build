@@ -33,7 +33,7 @@ jobs:
       - name: Compile web server
         run: |
             cd smplayer\webserver
-            nmake
+            nmake -f Makefile.msc
 
       - name: Compile smplayer
         run: |
