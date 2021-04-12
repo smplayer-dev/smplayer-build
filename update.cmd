@@ -1,3 +1,5 @@
+@echo off
+
 set ROOT=packages
 set WD=%cd%
 
@@ -8,7 +10,6 @@ svn update
 cd %WD%\%ROOT%\smplayer-portable
 svn cleanup
 svn update
-
 
 cd %WD%\%ROOT%\smplayer-themes
 svn cleanup

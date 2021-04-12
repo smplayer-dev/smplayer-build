@@ -1,3 +1,5 @@
+@echo off
+
 set DIR=packages
 
 svn co https://github.com/smplayer-dev/smplayer.git/trunk %DIR%\smplayer
