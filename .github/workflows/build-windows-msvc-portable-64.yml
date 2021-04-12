@@ -16,7 +16,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: '5.15.2'
-          arch: 'win64_mingw81'
+          arch: win64_msvc2019_64
           tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
       
       - name: Install Developer Command Prompt for Microsoft Visual C++
