@@ -1,0 +1,50 @@
+name: Build Ubuntu Packages
+
+on: workflow_dispatch
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        config:
+          - { name: 'xenial', os: 'ubuntu-16.04', qt: 4 }
+          - { name: 'bionic', os: 'ubuntu-18.04', qt: 5 }
+          - { name: 'focal', os: 'ubuntu-20.04', qt: 5 }
+
+    runs-on: ${{ matrix.config.os }}
+
+    steps:
+      - name: Install sources
+        run: svn co https://github.com/smplayer-dev/smplayer.git/trunk smplayer
+
+      - name: Install development packages
+        run: sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
+
+      - name: Install Qt 4
+        run: sudo apt-get install libqt4-dev
+        if: ${{ matrix.config.qt == 4 }}
+        
+      - name: Install Qt 5
+        run: sudo apt-get install qtbase5-dev qt5-qmake qt5-default qtscript5-dev qttools5-dev-tools qtbase5-private-dev libqt5webkit5-dev
+        if: ${{ matrix.config.qt == 5 }}
+
+      - name: Prepare sources
+        run: |
+            cd smplayer
+            ln -s debian-orig debian
+            cp debian-orig/changelog-orig debian-orig/changelog
+            ./get_svn_revision.sh
+            dch -v 21.1.0-`cat svn_revision`~${{ matrix.config.name }} "New version"
+
+      - name: Compile smplayer
+        run: cd smplayer && fakeroot debian/rules build
+        
+      - name: Build package
+        run: cd smplayer && fakeroot debian/rules binary
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: smplayer-${{ matrix.config.name }}
+          path: ./*.deb
