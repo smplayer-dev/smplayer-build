@@ -38,8 +38,9 @@ jobs:
             ln -s debian-orig debian
             cp debian-orig/changelog-orig debian-orig/changelog
             ./get_svn_revision.sh
-            dch -v 20.6.0-`cat svn_revision`~${{ matrix.config.name }} "New version"
-            echo "VERSION=r`cat svn_revision`" >> $GITHUB_ENV
+            VERSION=20.6.0-`cat svn_revision`~${{ matrix.config.name }}
+            dch $VERSION -v "New version"
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
  
       - name: Compile smtube
         run: cd smtube && fakeroot debian/rules build
@@ -50,5 +51,5 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smtube-${{ env.VERSION }}-${{ matrix.config.name }}
+          name: smtube-${{ env.VERSION }}
           path: ./*.deb
