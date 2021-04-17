@@ -37,9 +37,9 @@ jobs:
             cd smplayer
             ln -s debian-orig debian
             cp debian-orig/changelog-orig debian-orig/changelog
-            ./get_svn_revision.sh
-            VERSION=21.1.0-`cat svn_revision`~${{ matrix.config.name }}
-            dch -v $VERSION "New version"
+            ./get_version.sh
+            VERSION=`cat version`~${{ matrix.config.name }}
+            dch -v $VERSION "Development version"
             echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Compile smplayer
