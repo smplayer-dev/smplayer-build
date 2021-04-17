@@ -7,8 +7,8 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       
       - name: Install sources
         run: .\download_smtube.cmd
@@ -18,7 +18,6 @@ jobs:
         with:
           version: '5.15.2'
           arch: 'win64_mingw81'
-          #tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
          
       - name: Download QtWebkit
         run: Invoke-WebRequest -Uri https://github.com/qtwebkit/qtwebkit/releases/download/qtwebkit-5.212.0-alpha4/qtwebkit-Windows-Windows_10-Mingw73-Windows-Windows_10-X86_64.7z -OutFile qtwebkit.7z
