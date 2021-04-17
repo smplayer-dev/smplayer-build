@@ -124,7 +124,7 @@ jobs:
           path: packages\BUILD\output\${{ env.PACKAGEFILENAME }}
 
   build-64-portable:
-    name: Build 32 bit portable
+    name: Build 64 bit portable
     runs-on: windows-latest
     steps:
       - name: Checkout
