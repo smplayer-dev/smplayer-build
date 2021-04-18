@@ -27,10 +27,15 @@ jobs:
         run: 7z x qtwebkit.7z -o$Qt5_Dir
      
       - name: Build smtube
-        run: .\build_smtube.cmd
+        shell: bash
+        run: |
+            .\build_smtube.cmd
+            filename=`ls packages\smtube\setup\output\smtube*.exe | head -1`
+            echo $filename
+            echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
         
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smtube-x64
-          path: packages\smtube\setup\output\
+          name: ${{ env.INSTALLERFILENAME }}
+          path: packages\smtube\setup\output\smtube*.exe
