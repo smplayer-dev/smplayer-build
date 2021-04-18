@@ -32,7 +32,8 @@ jobs:
       - name: Get installer name
         shell: bash
         run: |
-            filename=`ls packages/smtube/setup/output/smtube*.exe | head -1`
+            cd packages/smtube/setup/output/
+            filename=`ls smtube*.exe | head -1`
             echo $filename
             echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
         
