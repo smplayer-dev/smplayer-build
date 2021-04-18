@@ -33,7 +33,6 @@ jobs:
         shell: bash
         run: |
             filename=`cd packages/smtube/setup/output/ ; ls smtube*.exe | head -1`
-            echo $filename
             echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
         
       - name: Create artifact
