@@ -33,11 +33,17 @@ jobs:
       - name: Build smtube
         run: .\build_smtube.cmd
 
+      - name: Get installer name
+        shell: bash
+        run: |
+            filename=`cd packages/smtube/setup/output/ ; ls smtube*.exe | head -1`
+            echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
+
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smtube-win32
-          path: packages\smtube\setup\output\
+          name: ${{ env.INSTALLERFILENAME }}
+          path: packages\smtube\setup\output\smtube*.exe
 
   build-64:
     name: Build 64 bit  
@@ -65,8 +71,14 @@ jobs:
       - name: Build smtube
         run: .\build_smtube.cmd
 
+      - name: Get installer name
+        shell: bash
+        run: |
+            filename=`cd packages/smtube/setup/output/ ; ls smtube*.exe | head -1`
+            echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
+
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smtube-x64
-          path: packages\smtube\setup\output\
+          name: ${{ env.INSTALLERFILENAME }}
+          path: packages\smtube\setup\output\smtube*.exe
