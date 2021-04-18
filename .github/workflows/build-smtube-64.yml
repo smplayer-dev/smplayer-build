@@ -27,9 +27,11 @@ jobs:
         run: 7z x qtwebkit.7z -o$Qt5_Dir
      
       - name: Build smtube
+        run: .\build_smtube.cmd
+
+      - name: Get installer name
         shell: bash
         run: |
-            ./build_smtube.cmd
             filename=`ls packages\smtube\setup\output\smtube*.exe | head -1`
             echo $filename
             echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
