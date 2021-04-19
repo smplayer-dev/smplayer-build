@@ -99,6 +99,8 @@ if %QTVER% lss 5.0.0 (
   copy "%QT_DIR%\plugins\imageformats\qgif.dll" "%OUTPUT_DIR%\imageformats\"
   copy "%QT_DIR%\plugins\platforms\qwindows.dll" "%OUTPUT_DIR%\platforms\"
 
+  mkdir "%OUTPUT_DIR%\styles"
+  copy "%QT_DIR%\plugins\styles\*.dll" "%OUTPUT_DIR%\styles\"
 )
 
 echo.
