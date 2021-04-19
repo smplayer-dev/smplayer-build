@@ -53,19 +53,30 @@ jobs:
         run: .\compile_themes.cmd
 
       - name: Compile smplayer
-        run: .\compile_smplayer.cmd
+        run: |
+            if ($env:PORTABLE -eq $true) {
+              .\compile_smplayer.cmd
+            } else {
+              .\compile_smplayer.cmd pe
+            }
 
       - name: Install
-        run: .\install.cmd
+        run: |
+            if ($env:PORTABLE -eq $true) {
+              .\install.cmd
+            } else {
+              .\install.cmd pe
+            }
 
       - name: Create installer
+        if: ${{ matrix.config.portable == false }}
         run: |
            .\nsis.cmd
            $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
            echo "INSTALLERFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Create 7z package
-        if: ${{ false }}
+        if: ${{ matrix.config.portable == true }}
         run: |
            .\create_portable_package.cmd
            $filename = Get-Content packages\BUILD\portable_filename.txt -TotalCount 1
