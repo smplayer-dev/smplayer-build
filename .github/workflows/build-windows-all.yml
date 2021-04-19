@@ -55,17 +55,17 @@ jobs:
       - name: Compile smplayer
         run: |
             if ($env:PORTABLE -eq $true) {
-              .\compile_smplayer.cmd
-            } else {
               .\compile_smplayer.cmd pe
+            } else {
+              .\compile_smplayer.cmd
             }
 
       - name: Install
         run: |
             if ($env:PORTABLE -eq $true) {
-              .\install.cmd
-            } else {
               .\install.cmd pe
+            } else {
+              .\install.cmd
             }
 
       - name: Create installer
