@@ -21,7 +21,7 @@ jobs:
       - name: Test
         run: |
             $env:PORTABLE
-            if ($env:PORTABLE) { "Portable" } else { "No portable" }
+            if ($env:PORTABLE -eq $true) { "Portable" } else { "No portable" }
         
       - name: Checkout
         uses: actions/checkout@v2
