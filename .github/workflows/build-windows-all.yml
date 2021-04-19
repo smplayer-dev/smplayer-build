@@ -10,6 +10,8 @@ jobs:
         config:
           - { arch: 'x64', 'portable': false }
           - { arch: 'win32', 'portable': false }
+          - { arch: 'x64', 'portable': true }
+          - { arch: 'win32', 'portable': true }          
 
     runs-on: windows-latest
     env:
@@ -17,7 +19,9 @@ jobs:
       
     steps:
       - name: Test
-        run: $env:PORTABLE
+        run: |
+            $env:PORTABLE
+            if ($env:PORTABLE) { echo "Portable" else echo "No portable" }
         
       - name: Checkout
         uses: actions/checkout@v2
