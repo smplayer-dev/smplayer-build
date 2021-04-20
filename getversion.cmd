@@ -9,7 +9,6 @@ set version_cpp=
 for /f "tokens=2" %%i in ('svn info ^| find /I "Revision:"') do set svn_revision=%%i
 
 if "%svn_revision%"=="" (
-  git rev-list --count HEAD
   for /f %%i in ('git rev-list --count HEAD') do set svn_revision=%%i
 )
 if "%svn_revision%"=="" (
