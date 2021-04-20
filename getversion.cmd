@@ -9,11 +9,14 @@ set version_cpp=
 for /f "tokens=2" %%i in ('svn info ^| find /I "Revision:"') do set svn_revision=%%i
 
 if "%svn_revision%"=="" (
+  git rev-list --count HEAD
+  for /f %%i in ('git rev-list --count HEAD') do set svn_revision=%%i
+)
+if "%svn_revision%"=="" (
   set svn_revision=UNKNOWN
   echo Unknown SVN revision. SVN missing in PATH or not a working copy.
-) else (
-  echo SVN Revision: %svn_revision%
 )
+echo SVN Revision: %svn_revision%
 echo.
 
 set ALL_PKG_VER=
