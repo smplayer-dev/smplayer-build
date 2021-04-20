@@ -8,7 +8,7 @@ cd %ROOT%\smplayer-portable\
 call %WD%\getversion.cmd
 cd %WD%
 
-set PORTABLE_PATH=%BUILD_DIR%\smplayer-portable-build
+set PORTABLE_PATH=%BUILD_DIR%\smplayer-portable
 
 mkdir "%PORTABLE_PATH%\screenshots"
 echo [%%General]> "%PORTABLE_PATH%\smplayer.ini"
@@ -20,8 +20,8 @@ copy "%PORTABLE_PATH%\smplayer.ini" "%PORTABLE_PATH%\smplayer_orig.ini"
 
 set PACKAGEFILENAME=smplayer-portable-%VER_MAJOR%.%VER_MINOR%.%VER_BUILD%.%VER_REVISION%-%BUILD_ARCH%.7z
 
-cd %PORTABLE_PATH%
-%WD%\7za a -t7z "..\output\%PACKAGEFILENAME%" "*" -mx9
+cd %BUILD_DIR%
+%WD%\7za a -t7z "output\%PACKAGEFILENAME%" "smplayer-portable" -mx9
 cd %WD%
 
 echo %PACKAGEFILENAME%

@@ -10,7 +10,7 @@ set ROOT=packages
 
 if [%build_portable%]==[true] (
   echo Installing portable version...
-  set OUTPUT_DIR=%ROOT%\BUILD\smplayer-portable-build
+  set OUTPUT_DIR=%ROOT%\BUILD\smplayer-portable
   set SMPLAYER_DIR=%ROOT%\smplayer-portable
 ) else (
    echo Installing normal version...
