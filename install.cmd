@@ -127,7 +127,8 @@ copy %SMPLAYER_DIR%\src\shortcuts\*.keys %OUTPUT_DIR%\shortcuts
 echo.
 echo ######        Documentation        #######
 echo.
-svn export --force %SMPLAYER_DIR%\docs %OUTPUT_DIR%\docs
+rem svn export --force %SMPLAYER_DIR%\docs %OUTPUT_DIR%\docs
+xcopy %SMPLAYER_DIR%\docs %OUTPUT_DIR%\docs\ /E
 
 echo.
 echo ######         Icon Themes         #######
