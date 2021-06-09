@@ -25,6 +25,12 @@ jobs:
             ./compile_mac.sh
             ls -l
 
+      - name: Install mplayer
+        run: |
+            wget https://github.com/smplayer-dev/mplayer/releases/download/v1.4-66/mplayer.tar.bz2
+            tar -xvf mplayer.tar.bz2 -C packages/smplayer/package/SMPlayer.app --strip-components=1
+            ls -lR packages/smplayer/package/SMPlayer.app
+            
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
