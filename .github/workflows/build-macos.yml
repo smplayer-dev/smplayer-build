@@ -23,16 +23,24 @@ jobs:
         run: |
             cd packages/smplayer
             ./compile_mac.sh
-            ls -l
+            #ls -l
 
       - name: Install mplayer
         run: |
             wget https://github.com/smplayer-dev/mplayer/releases/download/v1.4-66/mplayer.tar.bz2
             tar -xvf mplayer.tar.bz2 -C packages/smplayer/package/SMPlayer.app --strip-components=1
-            ls -lR packages/smplayer/package/SMPlayer.app
-            
+            #ls -lR packages/smplayer/package/SMPlayer.app
+
+      - name: Create dmg
+        run: |
+            brew install create-dmg
+            cd packages/smplayer/package/
+            create-dmg SMPlayer.dmg SMPlayer.app
+            ls -l
+
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
           name: smplayer.app
-          path: packages/smplayer/package/
+          #path: packages/smplayer/package/
+          path: packages/smplayer/package/SMPlayer.dmg
