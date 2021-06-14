@@ -27,7 +27,7 @@ jobs:
 
       - name: Install mplayer
         run: |
-            wget https://github.com/smplayer-dev/mplayer/releases/download/v1.4-66/mplayer.tar.bz2
+            wget https://github.com/smplayer-dev/mplayer/releases/download/v1.4-67/mplayer.tar.bz2
             tar -xvf mplayer.tar.bz2 -C packages/smplayer/package/SMPlayer.app --strip-components=1
             #ls -lR packages/smplayer/package/SMPlayer.app
 
