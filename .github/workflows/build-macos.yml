@@ -34,6 +34,7 @@ jobs:
       - name: Create dmg
         run: |
             brew install create-dmg
+            cd packages/smplayer
             ./create_dmg,sh
             ls -l package/
 
