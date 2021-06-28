@@ -35,6 +35,8 @@ jobs:
             cd packages/smplayer-themes
             make
             make install THEMES_PATH=../packages/smplayer/package/SMPlayer.app/Contents/MacOS/themes
+            pwd
+            ls -lR ..
             
       - name: Install mplayer
         run: |
@@ -54,7 +56,7 @@ jobs:
             brew install create-dmg
             cd packages/smplayer
             ./create_dmg,sh
-            ls -l package/
+            ls -lR package/
 
       - name: Create artifact
         uses: actions/upload-artifact@v2
