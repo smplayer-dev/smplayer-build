@@ -33,11 +33,7 @@ jobs:
         run: |
             git clone https://github.com/smplayer-dev/smtube.git packages/smtube
             cd packages/smtube
-            ./get_svn_revision.sh
-            cd src
-            qmake
-            make -j4
-            macdeployqt smtube.app
+            ./compile_mac.sh
 
       - name: Install smtube            
         run: |
