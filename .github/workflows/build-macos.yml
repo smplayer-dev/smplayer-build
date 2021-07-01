@@ -24,6 +24,26 @@ jobs:
           version: '5.15.2'
           host: 'mac'
 
+      - name: Install QtWebkit
+        run: |
+            wget https://github.com/qtwebkit/qtwebkit/releases/download/qtwebkit-5.212.0-alpha4/qtwebkit-MacOS-MacOS_10_13-Clang-MacOS-MacOS_10_13-X86_64.7z -O qtwebkit.7z
+            7z x qtwebkit.7z -o$Qt5_Dir
+ 
+      - name: Build smtube
+        run: |
+            https://github.com/smplayer-dev/smtube.git packages/smtube
+            cd packages/smtube
+            ./get_svn_revision.sh
+            cd src
+            qmake
+            make -j4
+
+      - name: Install smtube            
+        run: |
+            mkdir packages/smplayer/src/smplayer.app/Contents/MacOS/
+            cp packages/smtube/src/smtube.app/Contents/MacOS/smtube packages/smplayer/src/smplayer.app/Contents/MacOS/
+            ls -lR packages/smplayer/src/smplayer.app/
+
       - name: Compile
         run: |
             cd packages/smplayer
