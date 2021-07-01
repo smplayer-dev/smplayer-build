@@ -37,11 +37,12 @@ jobs:
             cd src
             qmake
             make -j4
+            macdeployqt smtube.app
 
       - name: Install smtube            
         run: |
             mkdir -p packages/smplayer/src/smplayer.app/Contents/MacOS/
-            cp packages/smtube/src/smtube.app/Contents/MacOS/smtube packages/smplayer/src/smplayer.app/Contents/MacOS/
+            cp -R packages/smtube/src/smtube.app/ packages/smplayer/src/smplayer.app/
             ls -lR packages/smplayer/src/smplayer.app/
 
       - name: Compile
