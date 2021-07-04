@@ -32,10 +32,11 @@ jobs:
       - name: Build smtube
         run: |
             git clone https://github.com/smplayer-dev/smtube.git packages/smtube
-            cd packages/smtube
-            ./compile_mac.sh
+            #cd packages/smtube
+            #./compile_mac.sh
 
-      - name: Install smtube            
+      - name: Install smtube
+        if: ${{false}}
         run: |
             mkdir -p packages/smplayer/src/smplayer.app/Contents/MacOS/
             cp -R packages/smtube/src/smtube.app/ packages/smplayer/src/smplayer.app/
@@ -52,14 +53,14 @@ jobs:
             git clone https://github.com/smplayer-dev/smplayer-themes.git packages/smplayer-themes
             cd packages/smplayer-themes
             make
-            make install THEMES_PATH=../smplayer/package/SMPlayer.app/Contents/MacOS/themes
+            make install THEMES_PATH=../smplayer/package/SMPlayer.app/Contents/Resources/themes
 
       - name: Install skins
         run: |
             git clone https://github.com/smplayer-dev/smplayer-skins.git packages/smplayer-skins
             cd packages/smplayer-skins
             make
-            make install THEMES_PATH=../smplayer/package/SMPlayer.app/Contents/MacOS/themes
+            make install THEMES_PATH=../smplayer/package/SMPlayer.app/Contents/Resources/themes
 
       - name: Install mplayer
         run: |
