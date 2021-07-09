@@ -20,8 +20,10 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
-            #sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
-            sudo apt-get install libxcb-icccm4-dev
+            sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
+            #sudo apt-get install libxcb-icccm4 libxcb-util1 libxcb-image0 \
+            #                     libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 \
+            #                     libxkbcommon-x11-0
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
@@ -40,7 +42,7 @@ jobs:
             cd smplayer
             ./get_svn_revision.sh
             make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease \
-                 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW"
+                 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW DEFINES+=SIMPLE_BUILD"
             
       - name: Install smplayer
         run: |
