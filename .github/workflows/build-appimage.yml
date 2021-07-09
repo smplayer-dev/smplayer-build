@@ -25,7 +25,7 @@ jobs:
             #                     libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 \
             #                     libxkbcommon-x11-0
             sudo apt-get install libxcb-xinerama0
-            sudo apt-get uninstall qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
+            sudo apt-get remove qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
