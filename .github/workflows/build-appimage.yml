@@ -11,6 +11,11 @@ jobs:
       - name: Install sources
         run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
+      - name: Install linuxdeployqt
+        run: |
+            wget https://github.com/probonopd/linuxdeployqt/releases/download/7/linuxdeployqt-7-x86_64.AppImage
+            chmod 755 linuxdeployqt-7-x86_64.AppImage
+
       - name: Install development packages
         run: |
             sudo apt-get update
@@ -21,11 +26,17 @@ jobs:
         run: |
             cd smplayer
             ./get_svn_revision.sh
-            #QMAKE_OPTS=DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=SIMPLE_BUILD
-            make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=SIMPLE_BUILD"
+            make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease \
+                 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=SIMPLE_BUILD"
             
       - name: Install smplayer
         run: |
             cd smplayer
             make install DESTDIR=appdir PREFIX=/usr
             ls -lR appdir
+
+      - name: Create package
+        run: |
+            cd smplayer
+            ../linuxdeployqt-7-x86_64.AppImage appdir/usr/share/applications/smplayer.desktop -appimage
+    
