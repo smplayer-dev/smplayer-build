@@ -1,0 +1,25 @@
+name: Build appimage
+
+on: workflow_dispatch
+
+jobs:
+
+  build:
+    runs-on: ubuntu-16.04
+
+    steps:
+      - name: Install sources
+        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
+
+      - name: Install development packages
+        run: |
+            sudo apt-get update
+            sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
+            sudo apt-get install qtbase5-dev qt5-qmake qt5-default qtscript5-dev qttools5-dev-tools qtbase5-private-dev
+            
+      - name: Compile smplayer
+        run: |
+            cd smplayer
+            ./get_svn_revision.sh
+            make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease
+            
