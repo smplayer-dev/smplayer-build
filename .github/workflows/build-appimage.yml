@@ -21,5 +21,6 @@ jobs:
         run: |
             cd smplayer
             ./get_svn_revision.sh
-            make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease
+            QMAKE_OPTS=DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=SIMPLE_BUILD
+            make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease QMAKE_OPTS="$(QMAKE_OPTS)"
             
