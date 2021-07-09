@@ -20,14 +20,19 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
-            sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
-            #sudo apt-get install libxcb-icccm4 libxcb-util1 libxcb-image0 \
-            #                     libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 \
-            #                     libxkbcommon-x11-0
+            #sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
             sudo apt-get install libxcb-xinerama0
-            sudo apt-get remove qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
+            #sudo apt-get remove qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
 
       - name: Install Qt
+        run: |
+            sudo add-apt-repository ppa:beineri/opt-qt-5.12.2-xenial -y
+            sudo apt-get update
+            sudo apt-get -y install qt512-meta-full libgl1-mesa-dev
+            source /opt/qt512/bin/qt512-env.sh
+
+      - name: Install Qt
+        if: ${{false}}
         uses: jurplel/install-qt-action@v2
         with:
           host: 'linux'
