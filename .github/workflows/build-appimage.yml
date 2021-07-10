@@ -5,9 +5,9 @@ on: workflow_dispatch
 jobs:
 
   build:
-    #runs-on: ubuntu-latest
-    #container: wachii/ubuntu-qt512:16.04
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    container: wachii/ubuntu-qt512:16.04
+    #runs-on: ubuntu-18.04
 
     steps:
       - name: Install sources
@@ -62,14 +62,15 @@ jobs:
         run: |
             test -x /opt/qt512/bin/qt512-env.sh && source /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
-            ./get_svn_revision.sh
-            make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease \
-                 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW DEFINES+=NO_MPLAYER"
-            
-      - name: Install smplayer
+            ./compile_appimage.sh
+
+      - name: Install mpv
         run: |
-            cd smplayer
-            make install DESTDIR=appdir PREFIX=/usr
+            sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
+            sudo apt-get update
+            wget https://github.com/smplayer-dev/mpv-mod/releases/download/v0.33.1-52/mpv_0.33.1-1.xenial_amd64.deb
+            sudo apt-get -y install ./mpv_0.33.1-1.xenial_amd64.deb
+            cp /usr/bin/mpv smplayer/appdir/usr/bin/
             ls -lR appdir
 
       - name: Create package
@@ -77,7 +78,9 @@ jobs:
         run: |
             test -x /opt/qt512/bin/qt512-env.sh && source /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
-            ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop -appimage --appimage-extract-and-run
+            ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop \
+                                     -executable=appdir/usr/bin/mpv -bundle-non-qt-libs \
+                                     -appimage --appimage-extract-and-run
     
       - name: Create artifact
         uses: actions/upload-artifact@v2
