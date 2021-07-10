@@ -71,7 +71,6 @@ jobs:
             wget https://github.com/smplayer-dev/mpv-mod/releases/download/v0.33.1-52/mpv_0.33.1-1.xenial_amd64.deb
             sudo apt-get -y install ./mpv_0.33.1-1.xenial_amd64.deb
             cp /usr/bin/mpv smplayer/appdir/usr/bin/
-            ls -lR appdir
 
       - name: Create package
         shell: bash
