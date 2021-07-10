@@ -63,6 +63,7 @@ jobs:
             ls -lR appdir
 
       - name: Create package
+        shell: bash
         run: |
             source /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
