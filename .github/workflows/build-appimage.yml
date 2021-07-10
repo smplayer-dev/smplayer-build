@@ -14,8 +14,8 @@ jobs:
 
       - name: Install linuxdeployqt
         run: |
-            wget https://github.com/probonopd/linuxdeployqt/releases/download/7/linuxdeployqt-7-x86_64.AppImage
-            chmod 755 linuxdeployqt-7-x86_64.AppImage
+            wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage -O linuxdeployqt.AppImage 
+            chmod 755 linuxdeployqt.AppImage
 
       - name: Install development packages
         run: |
@@ -66,7 +66,7 @@ jobs:
         run: |
             source /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
-            ../linuxdeployqt-7-x86_64.AppImage appdir/usr/share/applications/smplayer.desktop -verbose=2 -appimage --appimage-extract-and-run
+            ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop -appimage --appimage-extract-and-run
     
       - name: Create artifact
         uses: actions/upload-artifact@v2
