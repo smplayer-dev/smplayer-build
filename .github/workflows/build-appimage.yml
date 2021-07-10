@@ -5,8 +5,9 @@ on: workflow_dispatch
 jobs:
 
   build:
-    runs-on: ubuntu-latest
-    container: wachii/ubuntu-qt512:16.04
+    #runs-on: ubuntu-latest
+    #container: wachii/ubuntu-qt512:16.04
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Install sources
@@ -18,6 +19,7 @@ jobs:
             chmod 755 linuxdeployqt.AppImage
 
       - name: Install development packages
+        if: ${{false}}
         run: |
             sudo apt-get update
             #sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
@@ -26,6 +28,14 @@ jobs:
             #sudo apt-get -y remove qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev libqt5webkit5-dev
             #sudo apt-get -y install python3-pip
 
+
+      - name: Install development packages
+        #if: ${{false}}
+        run: |
+            sudo apt-get update
+            sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
+            sudo apt-get -y install libxcb-xinerama0 libgl1-mesa-dev
+            
       - name: Install Qt
         if: ${{false}}
         run: |
@@ -65,7 +75,7 @@ jobs:
       - name: Create package
         shell: bash
         run: |
-            source /opt/qt512/bin/qt512-env.sh || true
+            test -x /opt/qt512/bin/qt512-env.sh && source /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
             ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop -appimage --appimage-extract-and-run
     
