@@ -64,8 +64,9 @@ jobs:
 
       - name: Create package
         run: |
+            source /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
-            ../linuxdeployqt-7-x86_64.AppImage appdir/usr/share/applications/smplayer.desktop -appimage
+            ../linuxdeployqt-7-x86_64.AppImage appdir/usr/share/applications/smplayer.desktop -verbose=2 -appimage --appimage-extract-and-run
     
       - name: Create artifact
         uses: actions/upload-artifact@v2
