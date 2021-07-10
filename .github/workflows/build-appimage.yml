@@ -50,7 +50,7 @@ jobs:
       - name: Compile smplayer
         shell: bash
         run: |
-            source /opt/qt512/bin/qt512-env.sh || true
+            test -x /opt/qt512/bin/qt512-env.sh && /opt/qt512/bin/qt512-env.sh || true
             cd smplayer
             ./get_svn_revision.sh
             make PREFIX=/usr QMAKE=qmake LRELEASE=lrelease \
