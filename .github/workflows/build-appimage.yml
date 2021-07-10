@@ -82,5 +82,5 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smplayer
+          name: smplayer-appimage
           path: smplayer/*.AppImage
