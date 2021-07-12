@@ -25,33 +25,8 @@ jobs:
         if: ${{false}}
         run: |
             sudo apt-get update
-            #sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
-            #sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
-            sudo apt-get -y install libxcb-xinerama0 libgl1-mesa-dev
-            #sudo apt-get -y remove qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev libqt5webkit5-dev
-            #sudo apt-get -y install python3-pip
-
-
-      - name: Install development packages
-        if: ${{false}}
-        run: |
-            sudo apt-get update
             sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
             sudo apt-get -y install libxcb-xinerama0 libgl1-mesa-dev
-            
-      - name: Install Qt
-        if: ${{false}}
-        run: |
-            sudo add-apt-repository ppa:beineri/opt-qt-5.12.2-xenial -y
-            sudo apt-get update
-            sudo apt-get -y install qt512-meta-full libgl1-mesa-dev
-            source /opt/qt512/bin/qt512-env.sh || true
-
-      - name: Install Qt
-        if: ${{false}}
-        uses: jurplel/install-qt-action@v2
-        with:
-          host: 'linux'
 
       - name: Get version
         run: |
@@ -87,7 +62,7 @@ jobs:
             test -x ${{env.qt-env}} && source ${{env.qt-env}} || true
             cd smplayer
             ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop \
-                                     #-extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
+                                     -extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
                                      -executable=appdir/usr/bin/mpv \
                                      -executable=appdir/usr/bin/mplayer \
                                      -bundle-non-qt-libs \
@@ -96,5 +71,5 @@ jobs:
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smplayer-appimage
+          name: smplayer-${{env.VERSION}}
           path: smplayer/*.AppImage
