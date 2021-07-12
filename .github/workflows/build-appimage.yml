@@ -75,6 +75,12 @@ jobs:
             sudo apt-get -y install ./mpv_0.33.1-1.xenial_amd64.deb
             cp /usr/bin/mpv smplayer/appdir/usr/bin/
 
+      - name: Install mplayer
+        run: |
+            wget https://github.com/smplayer-dev/mplayer-mod/releases/download/v1.4-71/mplayer_1.4-1.xenial_amd64.deb
+            sudo apt-get -y install ./mplayer_1.4-1.xenial_amd64.deb
+            cp /usr/bin/mplayer smplayer/appdir/usr/bin
+
       - name: Create package
         shell: bash
         run: |
@@ -82,7 +88,9 @@ jobs:
             cd smplayer
             ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop \
                                      -extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
-                                     -executable=appdir/usr/bin/mpv -bundle-non-qt-libs \
+                                     -executable=appdir/usr/bin/mpv \
+                                     -executable=appdir/usr/bin/mplayer \
+                                     -bundle-non-qt-libs \
                                      -appimage --appimage-extract-and-run
     
       - name: Create artifact
