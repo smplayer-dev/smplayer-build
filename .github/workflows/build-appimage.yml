@@ -87,7 +87,7 @@ jobs:
             test -x ${{env.qt-env}} && source ${{env.qt-env}} || true
             cd smplayer
             ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop \
-                                     -extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
+                                     #-extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
                                      -executable=appdir/usr/bin/mpv \
                                      -executable=appdir/usr/bin/mplayer \
                                      -bundle-non-qt-libs \
