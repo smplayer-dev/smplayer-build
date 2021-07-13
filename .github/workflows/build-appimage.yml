@@ -8,15 +8,15 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
+          #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb'}
-          - { os: 'ubuntu-18.04', container: 'ubuntu-18.04', qt: '5.09',  mplayer: 'mplayer_1.4-1.bionic_amd64.deb', mpv: 'mpv_0.33.1-1.bionicl_amd64.deb'}
+          - { os: 'ubuntu-18.04', container: '', qt: '5.09',  mplayer: 'mplayer_1.4-1.bionic_amd64.deb', mpv: 'mpv_0.33.1-1.bionicl_amd64.deb'}
 
     runs-on:  ${{ matrix.config.os }}
-    container:
-      image: ${{ matrix.config.container }}
-      options: --user root
+    #container:
+    #  image: ${{ matrix.config.container }}
+    #  options: --user root
 
     steps:
       - name: Install sources
