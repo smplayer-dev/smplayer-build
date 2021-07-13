@@ -21,6 +21,7 @@ jobs:
     steps:
       - name: Install sources
         run: |
+            cd
             pwd
             git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
