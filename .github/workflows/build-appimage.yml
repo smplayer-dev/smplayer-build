@@ -1,6 +1,7 @@
-name: Build appimage
+name: Build Appimage
 env:
-  qt-env: '/opt/qt515/bin/qt515-env.sh'
+  #qt-env: '/opt/qt515/bin/qt515-env.sh'
+  qt-env: '/opt/qt512/bin/qt512-env.sh'
   
 on: workflow_dispatch
 
@@ -8,8 +9,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    #container: wachii/xenial-qt:5.12
-    container: wachii/xenial-qt:5.15.2
+    container: wachii/xenial-qt:5.12
+    #container: wachii/xenial-qt:5.15.2
     #runs-on: ubuntu-18.04
 
     steps:
