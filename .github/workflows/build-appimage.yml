@@ -60,7 +60,7 @@ jobs:
             sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
             sudo apt-get update
             wget https://github.com/smplayer-dev/mpv-mod/releases/download/v0.33.1-52/${{matrix.config.mpv}}
-            sudo apt-get -y install ./{{matrix.config.mpv}} --no-install-recommends
+            sudo apt-get -y install ./${{matrix.config.mpv}} --no-install-recommends
             cp /usr/bin/mpv smplayer/appdir/usr/bin/
 
       - name: Install mplayer
