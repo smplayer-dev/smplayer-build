@@ -18,9 +18,14 @@ jobs:
 
     steps:
       - name: Install sources
+        if: ${{false}}
+        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
+
+      - name: Install sources
         run: |
-            ls -lR
-            git clone https://github.com/smplayer-dev/smplayer.git smplayer
+            sudo apt-get -y update
+            sudo apt-get -y install subversion
+            svn co https://github.com/smplayer-dev/smplayer.git/trunk smplayer
 
       - name: Install linuxdeployqt
         if: ${{ matrix.config.qt != '5.14' }}
