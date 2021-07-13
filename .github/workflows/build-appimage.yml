@@ -22,7 +22,9 @@ jobs:
         run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
       - name: Install sources
+        #if: ${{false}}
         run: |
+            ls -lR ..
             sudo apt-get -y update
             sudo apt-get -y install subversion
             svn co https://github.com/smplayer-dev/smplayer.git/trunk smplayer
