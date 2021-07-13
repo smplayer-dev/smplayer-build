@@ -14,13 +14,13 @@ jobs:
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09', qt-env: '' }
 
     runs-on:  ${{ matrix.config.os }}
-    container:
-      image: ${{ matrix.config.container }}
-      options: --privileged
+    container: ${{ matrix.config.container }}
 
     steps:
       - name: Install sources
-        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
+        run: |
+            ls -lR
+            git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
       - name: Install linuxdeployqt
         if: ${{ matrix.config.qt != '5.14' }}
