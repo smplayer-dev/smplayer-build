@@ -14,12 +14,14 @@ jobs:
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09', qt-env: '' }
 
     runs-on:  ${{ matrix.config.os }}
-    container: ${{ matrix.config.container }}
+    container:
+      image: ${{ matrix.config.container }}
+      options: --user 1001
 
     steps:
-      - name: Fix permissions
-        if:  ${{ matrix.config.qt == '5.14' }}
-        run: sudo chmod 777 ../smplayer-build
+      #- name: Fix permissions
+      #  if:  ${{ matrix.config.qt == '5.14' }}
+      #  run: sudo chmod 777 ../smplayer-build
 
       - name: Install sources
         run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
