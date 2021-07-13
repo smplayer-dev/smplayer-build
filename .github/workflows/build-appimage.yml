@@ -20,7 +20,9 @@ jobs:
 
     steps:
       - name: Install sources
-        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
+        run: |
+            pwd
+            git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
       - name: Install linuxdeployqt
         if: ${{ matrix.config.qt-env != '' }}
