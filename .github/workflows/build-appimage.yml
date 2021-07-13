@@ -21,7 +21,7 @@ jobs:
         if:  ${{ matrix.config.qt == '5.14' }}
         run: |
            ls -lR ..
-           chmod 777 ../smplayer-build
+           sudo chmod 777 ../smplayer-build
            ls -lR ..
 
       - name: Install sources
