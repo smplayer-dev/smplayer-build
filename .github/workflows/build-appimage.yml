@@ -8,9 +8,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', qt-env: '/opt/qt515/bin/qt515-env.sh' }
+          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', qt-env: '/opt/qt515/bin/qt515-env.sh' }
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', qt-env: '/opt/qt512/bin/qt512-env.sh' }
-          - { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', qt-env: '' }
+          #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', qt-env: '' }
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09', qt-env: '' }
 
     runs-on:  ${{ matrix.config.os }}
@@ -19,18 +19,15 @@ jobs:
       options: --user root
 
     steps:
-      #- name: Fix permissions
-      #  if:  ${{ matrix.config.qt == '5.14' }}
-      #  run: sudo chmod 777 ../smplayer-build
-
       - name: Install sources
         run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
       - name: Install linuxdeployqt
-        if: ${{ matrix.config.qt != '5.14' }}
+        if: ${{ matrix.config.os == 'ubuntu-18.04' }}
         run: |
-            wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage -O linuxdeployqt.AppImage 
-            chmod 755 linuxdeployqt.AppImage
+            wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage -O linuxdeployqt
+            sudo mv linuxdeployqt /usr/local/bin/
+            sudo chmod 755 /usr/local/bin/linuxdeployqt
 
       - name: Install development packages
         if: ${{ matrix.config.os == 'ubuntu-18.04' }}
@@ -55,7 +52,6 @@ jobs:
       - name: Compile smplayer
         shell: bash
         run: |
-            test -x ${{matrix.config.qt-env}} && source ${{matrix.config.qt-env}} || true
             cd smplayer
             ./compile_appimage.sh
 
@@ -76,27 +72,14 @@ jobs:
             cp /usr/bin/mplayer smplayer/appdir/usr/bin
 
       - name: Create package
-        if: ${{ matrix.config.qt != '5.14' }}
-        shell: bash
-        run: |
-            test -x ${{matrix.config.qt-env}} && source ${{matrix.config.qt-env}} || true
-            cd smplayer
-            ../linuxdeployqt.AppImage appdir/usr/share/applications/smplayer.desktop \
-                                     -extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
-                                     -executable=appdir/usr/bin/mpv \
-                                     -executable=appdir/usr/bin/mplayer \
-                                     -bundle-non-qt-libs \
-                                     -appimage --appimage-extract-and-run
-
-      - name: Create package
-        if: ${{ matrix.config.qt == '5.14' }}
         run: |
             cd smplayer
             linuxdeployqt appdir/usr/share/applications/smplayer.desktop \
+                          -extra-plugins=platforms/libqwayland-egl.so,platforms/libqwayland-xcomposite-egl.so,platforms/libqwayland-generic.so,platforms/libqwayland-xcomposite-glx.so \
                           -executable=appdir/usr/bin/mpv \
                           -executable=appdir/usr/bin/mplayer \
                           -bundle-non-qt-libs \
-                          -appimage --appimage-extract-and-run         
+                          -appimage --appimage-extract-and-run
         
       - name: Create artifact
         uses: actions/upload-artifact@v2
