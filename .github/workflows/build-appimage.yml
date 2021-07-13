@@ -17,12 +17,19 @@ jobs:
     container: ${{ matrix.config.container }}
 
     steps:
-      - name: Install sources
-        if: ${{false}}
-        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
+      - name: Fix permissions
+        if:  ${{ matrix.config.qt == '5.14' }}
+        run: |
+           ls -lR ..
+           chmod 777 ../smplayer-build
+           ls -lR ..
 
       - name: Install sources
         #if: ${{false}}
+        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
+
+      - name: Install sources
+        if: ${{false}}
         run: |
             ls -lR ..
             sudo apt-get -y update
