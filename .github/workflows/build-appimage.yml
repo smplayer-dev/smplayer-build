@@ -41,7 +41,14 @@ jobs:
         run: |
             sudo apt-get -y update
             sudo apt-get -y install software-properties-common
-  
+
+      - name: Install qtwebkit
+        if:  ${{ matrix.config.qt == '5.14' }}
+        run: |
+            sudo apt-get -y install p7zip libxslt1.1 libxcomposite-dev
+            wget https://github.com/qtwebkit/qtwebkit/releases/download/qtwebkit-5.212.0-alpha4/qtwebkit-Linux-RHEL_7_6-GCC-Linux-RHEL_7_6-X86_64.7z
+            sudo 7zr x qtwebkit-Linux-RHEL_7_6-GCC-Linux-RHEL_7_6-X86_64.7z -o/opt/qt/5.14.0/gcc_64/
+
       - name: Get version
         run: |
             cd smplayer
