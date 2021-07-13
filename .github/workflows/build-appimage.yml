@@ -8,13 +8,15 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', qt-env: '/opt/qt515/bin/qt515-env.sh' }
-          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', qt-env: '/opt/qt512/bin/qt512-env.sh' }
-          #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', qt-env: '' }
+          #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', qt-env: '/opt/qt515/bin/qt515-env.sh' }
+          #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', qt-env: '/opt/qt512/bin/qt512-env.sh' }
+          - { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', qt-env: '' }
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09', qt-env: '' }
 
     runs-on:  ${{ matrix.config.os }}
-    container: ${{ matrix.config.container }}
+    container:
+      image: ${{ matrix.config.container }}
+      options: --privileged
 
     steps:
       - name: Install sources
