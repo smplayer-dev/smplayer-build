@@ -16,7 +16,7 @@ jobs:
     runs-on:  ${{ matrix.config.os }}
     container:
       image: ${{ matrix.config.container }}
-      options: --user 1001
+      options: --user root
 
     steps:
       #- name: Fix permissions
