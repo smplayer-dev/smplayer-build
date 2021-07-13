@@ -8,38 +8,33 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          #- { container: 'wachii/xenial-qt:5.15.2', qt: '5.15', qt-env: '/opt/qt515/bin/qt515-env.sh' }
-          #- { container: 'wachii/ubuntu-qt:21.04', qt: '5.12', qt-env: '/opt/qt512/bin/qt512-env.sh' }
-          - { container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', qt-env: '' }
+          #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', qt-env: '/opt/qt515/bin/qt515-env.sh' }
+          #- { os: 'ubuntu-latest', container: 'wachii/ubuntu-qt:21.04', qt: '5.12', qt-env: '/opt/qt512/bin/qt512-env.sh' }
+          #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', qt-env: '' }
+          - { os: 'ubuntu-18.04', container: '', qt: '5.09', qt-env: '' }
 
-    runs-on: ubuntu-latest
+    runs-on:  ${{ matrix.config.os }}
     container: ${{ matrix.config.container }}
-    #container: wachii/xenial-qt:5.12
-    #container: wachii/xenial-qt:5.15.2
-    #runs-on: ubuntu-18.04
 
     steps:
       - name: Install sources
-        run: |
-            cd
-            pwd
-            git clone https://github.com/smplayer-dev/smplayer.git smplayer
+        run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
 
       - name: Install linuxdeployqt
-        if: ${{ matrix.config.qt-env != '' }}
+        if: ${{ matrix.config.qt != '5.14' }}
         run: |
             wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage -O linuxdeployqt.AppImage 
             chmod 755 linuxdeployqt.AppImage
 
       - name: Install development packages
-        if: ${{false}}
+        if: ${{ matrix.config.os == 'ubuntu-18.04' }}
         run: |
             sudo apt-get update
-            sudo apt-get install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
+            sudo apt-get -y install qtbase5-dev qt5-qmake qt5-default libqt5opengl5-dev qttools5-dev-tools qtbase5-private-dev
             sudo apt-get -y install libxcb-xinerama0 libgl1-mesa-dev
 
       - name: Install add-apt-repository
-        if:  ${{ matrix.config.qt-env == '' }}
+        if:  ${{ matrix.config.qt == '5.14' }}
         run: |
             sudo apt-get update
             sudo apt-get install software-properties-common
@@ -59,6 +54,7 @@ jobs:
             ./compile_appimage.sh
 
       - name: Install mpv
+        if: ${{ matrix.config.qt != '5.09' }}
         run: |
             sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
             sudo apt-get update
@@ -67,13 +63,14 @@ jobs:
             cp /usr/bin/mpv smplayer/appdir/usr/bin/
 
       - name: Install mplayer
+        if: ${{ matrix.config.qt != '5.09' }}
         run: |
             wget https://github.com/smplayer-dev/mplayer-mod/releases/download/v1.4-71/mplayer_1.4-1.xenial_amd64.deb
             sudo apt-get -y install ./mplayer_1.4-1.xenial_amd64.deb
             cp /usr/bin/mplayer smplayer/appdir/usr/bin
 
       - name: Create package
-        if: ${{ matrix.config.qt-env != '' }}
+        if: ${{ matrix.config.qt != '5.14' }}
         shell: bash
         run: |
             test -x ${{matrix.config.qt-env}} && source ${{matrix.config.qt-env}} || true
@@ -86,7 +83,7 @@ jobs:
                                      -appimage --appimage-extract-and-run
 
       - name: Create package
-        if: ${{ matrix.config.qt-env == '' }}
+        if: ${{ matrix.config.qt == '5.14' }}
         run: |
             cd smplayer
             linuxdeployqt appdir/usr/share/applications/smplayer.desktop \
