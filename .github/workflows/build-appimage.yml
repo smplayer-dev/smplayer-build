@@ -19,22 +19,10 @@ jobs:
     steps:
       - name: Fix permissions
         if:  ${{ matrix.config.qt == '5.14' }}
-        run: |
-           ls -lR ..
-           sudo chmod 777 ../smplayer-build
-           ls -lR ..
+        run: sudo chmod 777 ../smplayer-build
 
       - name: Install sources
-        #if: ${{false}}
         run: git clone https://github.com/smplayer-dev/smplayer.git smplayer
-
-      - name: Install sources
-        if: ${{false}}
-        run: |
-            ls -lR ..
-            sudo apt-get -y update
-            sudo apt-get -y install subversion
-            svn co https://github.com/smplayer-dev/smplayer.git/trunk smplayer
 
       - name: Install linuxdeployqt
         if: ${{ matrix.config.qt != '5.14' }}
@@ -52,8 +40,8 @@ jobs:
       - name: Install add-apt-repository
         if:  ${{ matrix.config.qt == '5.14' }}
         run: |
-            sudo apt-get update
-            sudo apt-get install software-properties-common
+            sudo apt-get -y update
+            sudo apt-get -y install software-properties-common
   
       - name: Get version
         run: |
