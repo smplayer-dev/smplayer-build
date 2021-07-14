@@ -76,6 +76,10 @@ jobs:
             sudo apt-get -y install ./${{matrix.config.mplayer}} --no-install-recommends
             cp /usr/bin/mplayer smplayer/appdir/usr/bin
 
+      - name: Install openssl
+        if: ${{ matrix.config.qt == '5.14' }}
+        run: cp -a /usr/local/ssl/lib/lib*.so* smplayer/appdir/usr/lib/
+
       - name: Create package
         run: |
             cd smplayer
