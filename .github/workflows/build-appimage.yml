@@ -9,7 +9,8 @@ jobs:
       matrix:
         config:
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
-          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
+          #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
+          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.14.0', qt: '5.14', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb'}
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09',  mplayer: 'mplayer_1.4-1.bionic_amd64.deb', mpv: 'mpv_0.33.1-1.bionic_amd64.deb'}
 
@@ -37,13 +38,15 @@ jobs:
             sudo apt-get -y install libxcb-xinerama0 libgl1-mesa-dev
 
       - name: Install add-apt-repository
-        if:  ${{ matrix.config.qt == '5.14' }}
+        if: ${{false}}
+        #if:  ${{ matrix.config.qt == '5.14' }}
         run: |
             sudo apt-get -y update
             sudo apt-get -y install software-properties-common
 
       - name: Install qtwebkit
-        if:  ${{ matrix.config.qt == '5.14' }}
+        if: ${{false}}
+        #if:  ${{ matrix.config.qt == '5.14' }}
         run: |
             sudo apt-get -y install p7zip libxslt1.1 libxcomposite-dev libcups2
             wget https://github.com/qtwebkit/qtwebkit/releases/download/qtwebkit-5.212.0-alpha4/qtwebkit-Linux-RHEL_7_6-GCC-Linux-RHEL_7_6-X86_64.7z
