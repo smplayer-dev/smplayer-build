@@ -81,7 +81,9 @@ jobs:
 
       - name: Install openssl
         if: ${{ matrix.config.qt == '5.14' }}
-        run: cp -a /usr/local/ssl/lib/lib*.so* smplayer/appdir/usr/lib/
+        run: |
+            mkdir -p smplayer/appdir/usr/lib/
+            cp -a /usr/local/ssl/lib/lib*.so* smplayer/appdir/usr/lib/
 
       - name: Create package
         run: |
