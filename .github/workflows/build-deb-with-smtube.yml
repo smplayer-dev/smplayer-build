@@ -24,7 +24,12 @@ jobs:
             git clone https://github.com/smplayer-dev/smtube.git smtube
             cd smplayer
             ln -s ../smtube/src smtube
- 
+
+      - name: Install development packages
+        run: |
+            sudo apt-get update
+            sudo apt-get install zlib1g-dev fakeroot build-essential devscripts debhelper g++
+
       - name: Install Qt 4
         run: sudo apt-get install libqt4-dev libqtwebkit-dev libswscale-dev
         if: ${{ matrix.config.qt == 4 }}
