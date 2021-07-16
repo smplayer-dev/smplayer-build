@@ -46,6 +46,13 @@ jobs:
             dch -v $VERSION "Development version"
             echo "VERSION=$VERSION" >> $GITHUB_ENV
  
+      - name: Compile smtube
+        run: |
+            cd smplayer/smtube
+            lrelease smtube.pro
+            qmake DEFINES+="NO_DEBUG_ON_CONSOLE SMTUBE_LIB"
+            make -j4
+
       - name: Compile smplayer
         run: cd smplayer && fakeroot debian/rules build \
               QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SMTUBE_LIB DEFINES+=USE_SHM"
