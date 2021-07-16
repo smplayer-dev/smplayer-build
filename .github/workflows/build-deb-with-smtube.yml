@@ -1,6 +1,4 @@
-name: Build Ubuntu Packages
-env:
-  app-name: 'smplayer'
+name: Build Ubuntu Package with smtube
 
 on:
   workflow_dispatch:
@@ -14,8 +12,8 @@ jobs:
       matrix:
         config:
           - { name: 'xenial', os: 'ubuntu-16.04', qt: 4 }
-          - { name: 'bionic', os: 'ubuntu-18.04', qt: 5 }
-          - { name: 'focal', os: 'ubuntu-20.04', qt: 5 }
+          #- { name: 'bionic', os: 'ubuntu-18.04', qt: 5 }
+          #- { name: 'focal', os: 'ubuntu-20.04', qt: 5 }
 
     runs-on: ${{ matrix.config.os }}
 
@@ -27,7 +25,7 @@ jobs:
             cd smplayer
             ln -s ../smtube/src smtube
  
-       - name: Install Qt 4
+      - name: Install Qt 4
         run: sudo apt-get install libqt4-dev libqtwebkit-dev
         if: ${{ matrix.config.qt == 4 }}
 
@@ -48,9 +46,9 @@ jobs:
             dch -v $VERSION "Development version"
             echo "VERSION=$VERSION" >> $GITHUB_ENV
  
-       - name: Compile smplayer
+      - name: Compile smplayer
         run: cd smplayer && fakeroot debian/rules build \
-              QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SMTUBE_LIB DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW"
+              QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SMTUBE_LIB DEFINES+=USE_SHM"
 
       - name: Build package
         run: |
