@@ -26,7 +26,7 @@ jobs:
             ln -s ../smtube/src smtube
  
       - name: Install Qt 4
-        run: sudo apt-get install libqt4-dev libqtwebkit-dev
+        run: sudo apt-get install libqt4-dev libqtwebkit-dev libswscale-dev
         if: ${{ matrix.config.qt == 4 }}
 
       - name: Install Qt 5
