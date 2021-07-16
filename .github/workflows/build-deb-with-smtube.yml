@@ -72,11 +72,12 @@ jobs:
         run: |
             cd smplayer && fakeroot debian/rules binary
             cd ..
-            PACKAGEFILENAME=`ls smplayer_*.deb`
+            rename 's/smplayer_/smplayer-with-smtube_/' smplayer_*.deb
+            PACKAGEFILENAME=`ls smplayer*.deb`
             echo "PACKAGEFILENAME=$PACKAGEFILENAME" >> $GITHUB_ENV
 
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.PACKAGEFILENAME }}
-          path: ./smplayer_*.deb
+          path: ./smplayer*.deb
