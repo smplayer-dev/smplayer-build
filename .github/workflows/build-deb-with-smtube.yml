@@ -58,9 +58,15 @@ jobs:
             qmake DEFINES+="NO_DEBUG_ON_CONSOLE SMTUBE_LIB"
             make -j4
 
-      - name: Compile smplayer
+      - name: Compile smplayer (no opengl)
+        if: ${{ matrix.config.qt == 4 }}
         run: cd smplayer && fakeroot debian/rules build \
               QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SMTUBE_LIB DEFINES+=USE_SHM"
+
+      - name: Compile smplayer (opengl)
+        if: ${{ matrix.config.qt == 5 }}
+        run: cd smplayer && fakeroot debian/rules build \
+              QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SMTUBE_LIB DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW"
 
       - name: Build package
         run: |
