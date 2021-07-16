@@ -1,4 +1,4 @@
-name: Build Ubuntu Package with smtube
+name: Build SMPlayer with SMTube (Ubuntu)
 
 on:
   workflow_dispatch:
@@ -81,3 +81,13 @@ jobs:
         with:
           name: ${{ env.PACKAGEFILENAME }}
           path: ./smplayer*.deb
+
+      - name: Upload package to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./smplayer*.deb
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
