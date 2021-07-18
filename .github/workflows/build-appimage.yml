@@ -10,7 +10,7 @@ jobs:
         config:
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
-          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.14.0', qt: '5.14', mplayer: 'mplayer-mod_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
+          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.14.0', qt: '5.14', mplayer: 'mplayer-mod_1.4-1.xenial_amd64.deb', mpv: 'mpv-mod_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb'}
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09',  mplayer: 'mplayer_1.4-1.bionic_amd64.deb', mpv: 'mpv_0.33.1-1.bionic_amd64.deb'}
 
@@ -75,7 +75,7 @@ jobs:
         run: |
             sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
             sudo apt-get update
-            wget https://github.com/smplayer-dev/mpv-mod/releases/download/v0.33.1-52/${{matrix.config.mpv}}
+            wget https://github.com/smplayer-dev/mpv-mod/releases/download/v0.33.1-54/${{matrix.config.mpv}}
             sudo apt-get -y install ./${{matrix.config.mpv}} --no-install-recommends
             cp /usr/bin/mpv smplayer/appdir/usr/bin/
 
