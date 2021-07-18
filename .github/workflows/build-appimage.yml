@@ -10,7 +10,7 @@ jobs:
         config:
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.15.2', qt: '5.15', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.12', qt: '5.12', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
-          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.14.0', qt: '5.14', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
+          - { os: 'ubuntu-latest', container: 'wachii/xenial-qt:5.14.0', qt: '5.14', mplayer: 'mplayer-mod_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb' }
           #- { os: 'ubuntu-latest', container: 'a12e/docker-qt:5.14-gcc_64', qt: '5.14', mplayer: 'mplayer_1.4-1.xenial_amd64.deb', mpv: 'mpv_0.33.1-1.xenial_amd64.deb'}
           #- { os: 'ubuntu-18.04', container: '', qt: '5.09',  mplayer: 'mplayer_1.4-1.bionic_amd64.deb', mpv: 'mpv_0.33.1-1.bionic_amd64.deb'}
 
@@ -81,7 +81,7 @@ jobs:
 
       - name: Install mplayer
         run: |
-            wget https://github.com/smplayer-dev/mplayer-mod/releases/download/v1.4-71/${{matrix.config.mplayer}}
+            wget https://github.com/smplayer-dev/mplayer-mod/releases/download/v1.4-79/${{matrix.config.mplayer}}
             sudo apt-get -y install ./${{matrix.config.mplayer}} --no-install-recommends
             cp /usr/bin/mplayer smplayer/appdir/usr/bin
 
