@@ -25,7 +25,7 @@ pkgver() {
 
 build() {
   cd "$srcdir/$pkgname"
-  make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr
+  make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr -j4
 }
 
 package() {
