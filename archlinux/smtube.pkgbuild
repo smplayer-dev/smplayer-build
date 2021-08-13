@@ -1,0 +1,34 @@
+pkgname=smtube
+pkgver=21.7.0
+pkgrel=1
+pkgdesc="YouTube browser for SMPlayer"
+arch=('x86_64')
+url="https://www.smtube.org/"
+license=('GPL')
+depends=('qt5-script' 'qt5-webkit' 'desktop-file-utils' 'hicolor-icon-theme')
+makedepends=('qt5-tools')
+optdepends=('mplayer: play videos with MPlayer'
+            'smplayer: play videos with SMPlayer'
+            'dragon: play videos with Dragon Player'
+            'vlc: play videos with VLC'
+            'mpv: play videos with MPV'
+            'youtube-dl: download videos')
+source=("$pkgname::git+https://github.com/smplayer-dev/smtube.git")
+sha256sums=('SKIP')
+sha512sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$pkgname"
+  ./get_version.sh
+  cat version
+}
+
+build() {
+  cd "$srcdir/$pkgname"
+  make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+  make PREFIX=/usr DESTDIR="$pkgdir/" install
+}
