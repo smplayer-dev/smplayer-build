@@ -1,0 +1,36 @@
+pkgname=smplayer
+pkgver=21.1.0
+pkgrel=1
+pkgdesc='Media player with built-in codecs that can play virtually all video and audio formats'
+url='http://www.smplayer.info/'
+arch=('x86_64')
+license=('GPL')
+depends=('mpv' 'hicolor-icon-theme' 'libx11' 'zlib' 'gcc-libs')
+makedepends=('qt5-tools')
+optdepends=('smplayer-themes: icon themes collection'
+            'smplayer-skins: skin themes collection'
+            'smtube: browse and play youtube videos'
+            'youtube-dl: youtube videos and streaming'
+            'mplayer: alternative multimedia engine')
+source=("$pkgname::git+https://github.com/smplayer-dev/smplayer.git")
+sha256sums=('SKIP')
+sha512sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$pkgname"
+  ./get_version.sh
+  cat version
+}
+
+build() {
+  cd "$srcdir/$pkgname"
+  make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr \
+    DOC_PATH="\\\"/usr/share/doc/smplayer\\\"" \
+    QMAKE_OPTS=DEFINES+=NO_DEBUG_ON_CONSOLE -j4
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+  make DOC_PATH=/usr/share/doc/smplayer \
+    DESTDIR="${pkgdir}" PREFIX=/usr install
+}
