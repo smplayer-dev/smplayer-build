@@ -8,15 +8,16 @@ jobs:
     container:
       image: wachii/archlinux:devel
       #options: --user user
+      options: --privileged
 
     steps:
-      - name: Fix permissions
-        run: |
-            sudo chown user:user ../*
+      #- name: Fix permissions
+      #  run: |
+      #      sudo chown user:user ../*
       
       - name: Checkout
-        uses: actions/checkout@v2
-        #run: svn co https://github.com/smplayer-dev/smplayer-build.git/trunk/archlinux
+        #uses: actions/checkout@v2
+        run: svn co https://github.com/smplayer-dev/smplayer-build.git/trunk/archlinux
 
       - name: Build
         run: |
