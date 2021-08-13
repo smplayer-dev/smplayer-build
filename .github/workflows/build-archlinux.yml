@@ -7,9 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: wachii/archlinux:devel
-      options: --user user
+      #options: --user user
 
     steps:
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+      
       - name: Checkout
         #uses: actions/checkout@v2
         run: svn co https://github.com/smplayer-dev/smplayer-build.git/trunk/archlinux
