@@ -1,4 +1,4 @@
-name: Build archlinux packages
+name: Build Archlinux packages
 
 on: workflow_dispatch
 
@@ -10,14 +10,13 @@ jobs:
       #options: --user user
 
     steps:
-      - name: List
+      - name: Fix permissions
         run: |
-            sudo chown user:user ../smplayer-build
-            ls -lR ..
+            sudo chown user:user ../*
       
       - name: Checkout
-        #uses: actions/checkout@v2
-        run: svn co https://github.com/smplayer-dev/smplayer-build.git/trunk/archlinux
+        uses: actions/checkout@v2
+        #run: svn co https://github.com/smplayer-dev/smplayer-build.git/trunk/archlinux
 
       - name: Build
         run: |
