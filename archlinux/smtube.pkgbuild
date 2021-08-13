@@ -5,7 +5,7 @@ pkgdesc="YouTube browser for SMPlayer"
 arch=('x86_64')
 url="https://www.smtube.org/"
 license=('GPL')
-depends=('qt5-script' 'qt5-webkit' 'desktop-file-utils' 'hicolor-icon-theme')
+depends=('qt5-webkit' 'desktop-file-utils' 'hicolor-icon-theme')
 makedepends=('qt5-tools')
 optdepends=('mplayer: play videos with MPlayer'
             'smplayer: play videos with SMPlayer'
@@ -25,7 +25,7 @@ pkgver() {
 
 build() {
   cd "$srcdir/$pkgname"
-  make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr -j4
+  make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr
 }
 
 package() {

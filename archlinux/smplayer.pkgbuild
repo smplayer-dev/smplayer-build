@@ -26,7 +26,7 @@ build() {
   cd "$srcdir/$pkgname"
   make QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 PREFIX=/usr \
     DOC_PATH="\\\"/usr/share/doc/smplayer\\\"" \
-    QMAKE_OPTS=DEFINES+=NO_DEBUG_ON_CONSOLE -j4
+    QMAKE_OPTS=DEFINES+=NO_DEBUG_ON_CONSOLE
 }
 
 package() {
