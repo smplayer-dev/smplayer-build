@@ -7,13 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: wachii/archlinux:devel
-      #options: --user user
-      options: --privileged
+      options: --user user
 
     steps:
-      #- name: Fix permissions
-      #  run: |
-      #      sudo chown user:user ../*
+      - name: Fix permissions
+        run: |
+            sudo chown user:user ../*
       
       - name: Checkout
         #uses: actions/checkout@v2
