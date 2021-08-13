@@ -1,0 +1,23 @@
+name: Build archlinux packages
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: wachii/archlinux:devel
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+            cd archlinux
+            ./build_smtube.sh
+            
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: smtube-archlinux
+          path: archlinux/smtube-*.pkg.tar.zst
