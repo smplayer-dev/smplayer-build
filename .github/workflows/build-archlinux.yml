@@ -18,13 +18,18 @@ jobs:
         #uses: actions/checkout@v2
         run: svn co https://github.com/smplayer-dev/smplayer-build.git/trunk/archlinux
 
-      - name: Build
+      - name: Build smtube
         run: |
             cd archlinux
             ./build_smtube.sh
             
+      - name: Build smplayer
+        run: |
+            cd archlinux
+            ./build_smplayer.sh
+                  
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: smtube-archlinux
-          path: archlinux/smtube-*.pkg.tar.zst
+          name: packages-archlinux
+          path: archlinux/*.pkg.tar.zst
