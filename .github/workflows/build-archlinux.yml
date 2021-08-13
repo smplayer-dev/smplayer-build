@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: List
-        run: ls -lR ..
+        run: |
+            sudo chown user:user ../smplayer-build
+            ls -lR ..
       
       - name: Checkout
         #uses: actions/checkout@v2
