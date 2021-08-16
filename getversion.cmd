@@ -52,7 +52,7 @@ if defined version_cpp (
   if [%development_version%]==[1] (
     set "ALL_PKG_VER=%version_cpp%.%svn_revision%"
   ) else (
-    set "ALL_PKG_VER=%version_cpp%"
+    set "ALL_PKG_VER=%version_cpp%.0"
   )
 )
 
