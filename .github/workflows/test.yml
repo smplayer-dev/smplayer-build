@@ -36,5 +36,11 @@ jobs:
             echo "$MinGW_Bin_Path" >> $GITHUB_PATH
             echo "$Qt_Bin_Path" >> $GITHUB_PATH
 
+      - name: Build smtube
+        run: |
+            .\download_smtube.cmd
+            .\build_smtube.cmd
+
       - name: Setup tmate session
+        if: ${{false}}
         uses: mxschmitt/action-tmate@v3
