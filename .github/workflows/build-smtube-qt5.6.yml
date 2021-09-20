@@ -1,4 +1,4 @@
-name: Build smtube with Qt 5.6
+name: Build SMTube with Qt 5.6
 on:
   workflow_dispatch:
 
@@ -52,7 +52,3 @@ jobs:
         with:
           name: ${{ env.INSTALLERFILENAME }}
           path: packages\smtube\setup\output\smtube*.exe
-
-      - name: Setup tmate session
-        if: ${{false}}
-        uses: mxschmitt/action-tmate@v3
