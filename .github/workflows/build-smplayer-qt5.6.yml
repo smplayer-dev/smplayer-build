@@ -49,6 +49,10 @@ jobs:
             .\download_packages.cmd
             .\uncompress_players.cmd
 
+      - name: Update sources
+        if: steps.cache-packages.outputs.cache-hit == 'true'
+        run: .\update_smplayer.cmd
+
       - name: Compile themes
         run: .\compile_themes.cmd
         
