@@ -1,4 +1,4 @@
-name: Qt 5.6
+name: Build smtube with Qt 5.6
 on:
   workflow_dispatch:
 
@@ -40,6 +40,18 @@ jobs:
         run: |
             .\download_smtube.cmd
             .\build_smtube.cmd
+
+      - name: Get installer name
+        shell: bash
+        run: |
+            filename=`cd packages/smtube/setup/output/ ; ls smtube*.exe | head -1`
+            echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.INSTALLERFILENAME }}
+          path: packages\smtube\setup\output\smtube*.exe
 
       - name: Setup tmate session
         if: ${{false}}
