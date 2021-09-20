@@ -51,7 +51,9 @@ jobs:
 
       - name: Update sources
         if: steps.cache-packages.outputs.cache-hit == 'true'
-        run: .\update_smplayer.cmd
+        run: |
+            .\update_smplayer.cmd
+            rmdir packages\BUILD\smplayer-build /s /q
 
       - name: Compile themes
         run: .\compile_themes.cmd
@@ -67,7 +69,10 @@ jobs:
            .\nsis.cmd
            $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
            echo "INSTALLERFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        
+
+      - name: Clean
+        run: rmdir packages\BUILD\smplayer-build /s /q
+
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
