@@ -1,0 +1,20 @@
+name: Windows shell
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Qt
+        shell: bash
+        run: |
+            wget https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_32-563-p-dwarf2-opengl_dynamic.7z -O Qt5.7z
+            7z x Qt5.7z -oQt5
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
