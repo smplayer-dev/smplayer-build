@@ -17,6 +17,13 @@ jobs:
           path: Qt5
           key: ${{ runner.os }}-qt5.6
 
+      - name: Cache packages
+        id: cache-packages
+        uses: actions/cache@v2
+        with:
+          path: packages
+          key: ${{ runner.os }}-packages
+
       - name: Install Qt 5.6
         shell: bash
         #if: ${{false}}
@@ -37,7 +44,12 @@ jobs:
             echo "$Qt_Bin_Path" >> $GITHUB_PATH
 
       - name: Install sources
-        run: .\download_packages.cmd
+        if: steps.cache-packages.outputs.cache-hit != 'true'
+        run: |
+            .\download_packages.cmd
+            .\uncompress_players.cmd
+            svn co https://github.com/smplayer-dev/smplayer-themes.git/trunk packages\smplayer-themes
+            svn co https://github.com/smplayer-dev/smplayer-skins.git/trunk packages\smplayer-skins
 
       - name: Compile themes
         run: .\compile_themes.cmd
