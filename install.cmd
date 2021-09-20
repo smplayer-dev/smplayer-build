@@ -81,11 +81,19 @@ if %QTVER% geq 5.0.0 (
 )
 
 if "%BUILD_ARCH%" == "x64" (
-    rem copy %QT_DIR%\..\..\Tools\OpenSSL\Win_x64\bin\*.dll %OUTPUT_DIR%
-	copy openssl-1.1.1l\64bit\*.dll %OUTPUT_DIR%
+    if "%QTVER:~0,3%"=="5.6" (
+		copy openssl-1.0\64bit\*.dll %OUTPUT_DIR%
+	) else (
+		rem copy %QT_DIR%\..\..\Tools\OpenSSL\Win_x64\bin\*.dll %OUTPUT_DIR%
+		copy openssl-1.1.1l\64bit\*.dll %OUTPUT_DIR%
+	)
 ) else (
-    rem copy %QT_DIR%\..\..\Tools\OpenSSL\Win_x86\bin\*.dll %OUTPUT_DIR%
-	copy openssl-1.1.1l\32bit\*.dll %OUTPUT_DIR%
+	if "%QTVER:~0,3%"=="5.6" (
+		copy openssl-1.0\32bit\*.dll %OUTPUT_DIR%
+	) else (
+		rem copy %QT_DIR%\..\..\Tools\OpenSSL\Win_x86\bin\*.dll %OUTPUT_DIR%
+		copy openssl-1.1.1l\32bit\*.dll %OUTPUT_DIR%
+	)
 )
 
 rem Qt Plugins
