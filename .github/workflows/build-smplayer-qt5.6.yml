@@ -48,8 +48,6 @@ jobs:
         run: |
             .\download_packages.cmd
             .\uncompress_players.cmd
-            svn co https://github.com/smplayer-dev/smplayer-themes.git/trunk packages\smplayer-themes
-            svn co https://github.com/smplayer-dev/smplayer-skins.git/trunk packages\smplayer-skins
 
       - name: Compile themes
         run: .\compile_themes.cmd
