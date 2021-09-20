@@ -36,6 +36,9 @@ jobs:
             echo "$MinGW_Bin_Path" >> $GITHUB_PATH
             echo "$Qt_Bin_Path" >> $GITHUB_PATH
 
+      - name: Install sources
+        run: .\download_packages.cmd
+
       - name: Compile themes
         run: .\compile_themes.cmd
         
