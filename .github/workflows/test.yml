@@ -7,16 +7,22 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
+        if: ${false}}
         uses: actions/checkout@v2
 
-      - name: Install Qt
+      - name: Install Qt 5.6
         shell: bash
+        if: ${false}}
         run: |
             choco install wget --no-progress
             wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_32-563-p-dwarf2-opengl_dynamic.7z -O Qt5.6z
             7z x Qt5.6z -oQt5
-            set MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw32/bin
-            set Qt_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw493_32-563-p-dwarf2/bin
+
+      - name: Set environment variables
+        shell: bash
+        run: |
+            export MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw32/bin
+            export Qt_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw493_32-563-p-dwarf2/bin
             echo "MinGW_Bin_Path=$MinGW_Bin_Path" >> $GITHUB_ENV
             echo "Qt_Bin_Path=$Qt_Bin_Path" >> $GITHUB_ENV
             echo "$MinGW_Bin_Path" >> $GITHUB_PATH
