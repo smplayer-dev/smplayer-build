@@ -53,7 +53,7 @@ jobs:
         if: steps.cache-packages.outputs.cache-hit == 'true'
         run: |
             .\update_smplayer.cmd
-            rm packages\BUILD\smplayer-build -r -f
+            Remove-Item packages\BUILD\smplayer-build -Recurse -Force -Confirm:$false
 
       - name: Compile themes
         run: .\compile_themes.cmd
