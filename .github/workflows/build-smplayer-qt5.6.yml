@@ -90,6 +90,7 @@ jobs:
            echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Rename package
+        run: |
             PACKAGEFILENAME=${{ env.PACKAGEFILENAME }}
             extension="${PACKAGEFILENAME##*.}"
             filename="${PACKAGEFILENAME%.*}"
