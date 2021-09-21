@@ -25,8 +25,7 @@ jobs:
         if: ${{ matrix.config.arch == 'win32' }}
         shell: bash
         run: |
-            choco install wget --no-progress
-            wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_32-563-p-dwarf2-opengl_dynamic.7z -O Qt5.6z
+            ./wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_32-563-p-dwarf2-opengl_dynamic.7z -O Qt5.6z
             7z x Qt5.6z -oQt5
             # Set environment variables
             export MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw32/bin
@@ -40,8 +39,7 @@ jobs:
         if: ${{ matrix.config.arch == 'x64' }}
         shell: bash
         run: |
-            choco install wget --no-progress
-            wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_64-563-p-seh-opengl_dynamic.7z -O Qt5.6z
+            ./wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_64-563-p-seh-opengl_dynamic.7z -O Qt5.6z
             7z x Qt5.6z -oQt5
             # Set environment variables
             export MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw64/bin
