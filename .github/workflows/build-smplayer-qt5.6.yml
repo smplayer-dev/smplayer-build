@@ -62,25 +62,25 @@ jobs:
         run: |
            .\nsis.cmd
            $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
-           echo "FILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+           echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Create 7z package
         if: ${{ matrix.config.portable == true }}
         run: |
            .\create_portable_package.cmd
            $filename = Get-Content packages\BUILD\portable_filename.txt -TotalCount 1
-           echo "FILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+           echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Rename package
         shell: bash
         run: |
-            PACKAGEFILENAME=${{ env.FILENAME }}
+            PACKAGEFILENAME=${{ env.PACKAGEFILENAME }}
             extension="${PACKAGEFILENAME##*.}"
             filename="${PACKAGEFILENAME%.*}"
             new_filename="$filename-qt5.6.$extension"
             cd packages/BUILD/output/
             mv $PACKAGEFILENAME $new_filename
-            echo "PACKAGEFILENAME=$new_filename" >> GITHUB_ENV
+            echo "PACKAGEFILENAME=$new_filename" >> $GITHUB_ENV
        
       - name: Create artifact
         uses: actions/upload-artifact@v2
