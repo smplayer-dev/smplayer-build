@@ -4,7 +4,17 @@ on:
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { arch: 'win32', 'portable': false }
+          - { arch: 'win32', 'portable': true }
+
     runs-on: windows-latest
+    env:
+      PORTABLE: ${{ matrix.config.portable }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,12 +42,23 @@ jobs:
         run: .\compile_themes.cmd
         
       - name: Compile smplayer
-        run: .\compile_smplayer.cmd
+        run: |
+            if ($env:PORTABLE -eq $true) {
+              .\compile_smplayer.cmd pe
+            } else {
+              .\compile_smplayer.cmd
+            }
 
       - name: Install
-        run: .\install.cmd
+        run: |
+            if ($env:PORTABLE -eq $true) {
+              .\install.cmd pe
+            } else {
+              .\install.cmd
+            }
         
       - name: Create installer
+        if: ${{ matrix.config.portable == false }}
         run: |
            .\nsis.cmd
            $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
@@ -46,10 +67,17 @@ jobs:
            $basename = (Get-Item $filename ).Basename
            $new_filename = "$basename-qt5.6.exe"  
            move $filename $new_filename
-           echo "INSTALLERFILENAME=$new_filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-       
+           echo "PACKAGEFILENAME=$new_filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Create 7z package
+        if: ${{ matrix.config.portable == true }}
+        run: |
+           .\create_portable_package.cmd
+           $filename = Get-Content packages\BUILD\portable_filename.txt -TotalCount 1
+           echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.INSTALLERFILENAME }}
-          path: packages\BUILD\output\${{ env.INSTALLERFILENAME }}
+          name: ${{ env.PACKAGEFILENAME }}
+          path: packages\BUILD\output\${{ env.PACKAGEFILENAME }}
