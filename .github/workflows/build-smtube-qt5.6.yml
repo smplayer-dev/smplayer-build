@@ -9,7 +9,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Qt 5.6
+      - name: Install Qt 5.6 (32 bit)
+        if: ${{false}}
         shell: bash
         run: |
             choco install wget --no-progress
@@ -18,6 +19,20 @@ jobs:
             # Set environment variables
             export MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw32/bin
             export Qt_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw493_32-563-p-dwarf2/bin
+            echo "MinGW_Bin_Path=$MinGW_Bin_Path" >> $GITHUB_ENV
+            echo "Qt_Bin_Path=$Qt_Bin_Path" >> $GITHUB_ENV
+            echo "$MinGW_Bin_Path" >> $GITHUB_PATH
+            echo "$Qt_Bin_Path" >> $GITHUB_PATH
+
+      - name: Install Qt 5.6 (64 bit)
+        shell: bash
+        run: |
+            choco install wget --no-progress
+            wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_64-563-p-seh-opengl_dynamic.7z -O Qt5.6z
+            7z x Qt5.6z -oQt5
+            # Set environment variables
+            export MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw64/bin
+            export Qt_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw493_64-563-p-seh/bin
             echo "MinGW_Bin_Path=$MinGW_Bin_Path" >> $GITHUB_ENV
             echo "Qt_Bin_Path=$Qt_Bin_Path" >> $GITHUB_ENV
             echo "$MinGW_Bin_Path" >> $GITHUB_PATH
