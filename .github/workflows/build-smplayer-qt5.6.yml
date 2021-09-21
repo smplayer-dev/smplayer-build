@@ -16,6 +16,17 @@ jobs:
       PORTABLE: ${{ matrix.config.portable }}
 
     steps:
+      - name: Test
+        shell: bash
+        run: |
+            PACKAGEFILENAME="smplayer-21.8.0.9989-win32.exe"
+            extension="${PACKAGEFILENAME##*.}"
+            filename="${PACKAGEFILENAME%.*}"
+            new_filename="$filename-qt5.6.$extension"
+            echo $new_filename
+            echo "PACKAGEFILENAME=$new_filename" >> GITHUB_ENV
+            asasasasasasas
+        
       - name: Checkout
         uses: actions/checkout@v2
 
