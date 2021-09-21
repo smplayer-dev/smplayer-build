@@ -9,32 +9,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v2
-        with:
-          path: Qt5
-          key: ${{ runner.os }}-qt5.6
-
-      - name: Cache packages
-        id: cache-packages
-        uses: actions/cache@v2
-        with:
-          path: packages
-          key: ${{ runner.os }}-packages
-
       - name: Install Qt 5.6
         shell: bash
-        #if: ${{false}}
-        if: steps.cache-qt.outputs.cache-hit != 'true'
         run: |
             choco install wget --no-progress
             wget -nv https://github.com/smplayer-dev/smplayer-build/releases/download/qt5.6.3/Qt5.6.3_mingw493_32-563-p-dwarf2-opengl_dynamic.7z -O Qt5.6z
             7z x Qt5.6z -oQt5
-
-      - name: Set environment variables
-        shell: bash
-        run: |
+            # Set environment variables
             export MinGW_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw32/bin
             export Qt_Bin_Path=$GITHUB_WORKSPACE/Qt5/mingw493_32-563-p-dwarf2/bin
             echo "MinGW_Bin_Path=$MinGW_Bin_Path" >> $GITHUB_ENV
@@ -43,16 +24,9 @@ jobs:
             echo "$Qt_Bin_Path" >> $GITHUB_PATH
 
       - name: Install sources
-        if: steps.cache-packages.outputs.cache-hit != 'true'
         run: |
             .\download_packages.cmd
             .\uncompress_players.cmd
-
-      - name: Update sources
-        if: steps.cache-packages.outputs.cache-hit == 'true'
-        run: |
-            .\update_smplayer.cmd
-            Remove-Item packages\BUILD\smplayer-build -Recurse -Force -Confirm:$false
 
       - name: Compile themes
         run: .\compile_themes.cmd
@@ -74,10 +48,6 @@ jobs:
            move $filename $new_filename
            echo "INSTALLERFILENAME=$new_filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
        
-      - name: Clean installation
-        if: ${{false}}
-        run: Remove-Item packages\BUILD\smplayer-build -Recurse -Force -Confirm:$false
-
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
