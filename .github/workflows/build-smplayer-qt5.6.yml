@@ -99,7 +99,7 @@ jobs:
             echo $new_filename
             echo "PACKAGEFILENAME=$new_filename" >> GITHUB_ENV
             cd packages/BUILD/output/
-            move $PACKAGEFILENAME $new_filename
+            mv $PACKAGEFILENAME $new_filename
             ls
        
       - name: Create artifact
