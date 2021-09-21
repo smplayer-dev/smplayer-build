@@ -16,18 +16,6 @@ jobs:
       PORTABLE: ${{ matrix.config.portable }}
 
     steps:
-      - name: Test
-        shell: bash
-        if: ${{false}}
-        run: |
-            PACKAGEFILENAME="smplayer-21.8.0.9989-win32.exe"
-            extension="${PACKAGEFILENAME##*.}"
-            filename="${PACKAGEFILENAME%.*}"
-            new_filename="$filename-qt5.6.$extension"
-            echo $new_filename
-            echo "PACKAGEFILENAME=$new_filename" >> GITHUB_ENV
-            asasasasasasas
-        
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -74,33 +62,25 @@ jobs:
         run: |
            .\nsis.cmd
            $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
-           echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-           # Rename
-           #cd packages\BUILD\output\
-           #$basename = (Get-Item $filename ).Basename
-           #$new_filename = "$basename-qt5.6.exe"  
-           #move $filename $new_filename
-           #echo "PACKAGEFILENAME=$new_filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+           echo "FILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Create 7z package
         if: ${{ matrix.config.portable == true }}
         run: |
            .\create_portable_package.cmd
            $filename = Get-Content packages\BUILD\portable_filename.txt -TotalCount 1
-           echo "PACKAGEFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+           echo "FILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Rename package
         shell: bash
         run: |
-            PACKAGEFILENAME=${{ env.PACKAGEFILENAME }}
+            PACKAGEFILENAME=${{ env.FILENAME }}
             extension="${PACKAGEFILENAME##*.}"
             filename="${PACKAGEFILENAME%.*}"
             new_filename="$filename-qt5.6.$extension"
-            echo $new_filename
-            echo "PACKAGEFILENAME=$new_filename" >> GITHUB_ENV
             cd packages/BUILD/output/
             mv $PACKAGEFILENAME $new_filename
-            ls
+            echo "PACKAGEFILENAME=$new_filename" >> GITHUB_ENV
        
       - name: Create artifact
         uses: actions/upload-artifact@v2
