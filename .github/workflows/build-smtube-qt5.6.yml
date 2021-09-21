@@ -45,10 +45,21 @@ jobs:
         shell: bash
         run: |
             filename=`cd packages/smtube/setup/output/ ; ls smtube*.exe | head -1`
-            echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
+            echo "PACKAGEFILENAME=$filename" >> $GITHUB_ENV
+
+      - name: Rename package
+        shell: bash
+        run: |
+            PACKAGEFILENAME=${{ env.PACKAGEFILENAME }}
+            extension="${PACKAGEFILENAME##*.}"
+            filename="${PACKAGEFILENAME%.*}"
+            new_filename="$filename-qt5.6.$extension"
+            cd packages/smtube/setup/output/
+            mv $PACKAGEFILENAME $new_filename
+            echo "PACKAGEFILENAME=$new_filename" >> $GITHUB_ENV
 
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.INSTALLERFILENAME }}
+          name: ${{ env.PACKAGEFILENAME }}
           path: packages\smtube\setup\output\smtube*.exe
