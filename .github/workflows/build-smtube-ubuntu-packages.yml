@@ -14,8 +14,7 @@ jobs:
           - { name: 'focal', os: 'ubuntu-20.04', qt: 5, container: '' }
 
     runs-on: ${{ matrix.config.os }}
-    container:
-      image: ${{ matrix.config.container }}
+    container: ${{ matrix.config.container }}
 
     steps:
       - name: Install sources
