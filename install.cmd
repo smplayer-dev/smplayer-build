@@ -51,6 +51,10 @@ copy %SMPLAYER_DIR%\webserver\simple_web_server.exe %OUTPUT_DIR%
 
 windeployqt --no-angle --no-opengl-sw %OUTPUT_DIR%\smplayer.exe
 
+rem Missing libraries for qtwebkit
+copy "%QT_DIR%\bin\libxml2-2.dll" %OUTPUT_DIR%
+copy "%QT_DIR%\bin\libxslt-1.dll" %OUTPUT_DIR%
+    
 if "%BUILD_ARCH%" == "x64" (
     if "%QTVER:~0,3%"=="5.6" (
 		copy openssl-1.0\64bit\*.dll %OUTPUT_DIR%
