@@ -49,7 +49,7 @@ rem copy %SMPLAYER_DIR%\zlib\zlib1.dll %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\*.txt %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\webserver\simple_web_server.exe %OUTPUT_DIR%
 
-windeployqt --no-angle --no-opengl-sw %OUTPUT_DIR%\smplayer.exe
+windeployqt --compiler-runtime --no-angle --no-opengl-sw %OUTPUT_DIR%\smplayer.exe
 
 rem Missing libraries for qtwebkit
 copy "%QT_DIR%\bin\libxml2-2.dll" %OUTPUT_DIR%
