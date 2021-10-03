@@ -49,36 +49,7 @@ rem copy %SMPLAYER_DIR%\zlib\zlib1.dll %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\*.txt %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\webserver\simple_web_server.exe %OUTPUT_DIR%
 
-if %QTVER% geq 5.0.0 (
-  copy %QT_DIR%\bin\Qt5Core.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\Qt5Gui.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\Qt5Network.dll %OUTPUT_DIR%
-  rem copy %QT_DIR%\bin\Qt5Script.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\Qt5Widgets.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\Qt5Xml.dll %OUTPUT_DIR%
-  copy "%QT_DIR%\bin\libstdc++-6.dll" %OUTPUT_DIR%
-  copy %QT_DIR%\bin\libgcc_s_dw2-1.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\libwinpthread-1.dll %OUTPUT_DIR%
-  rem copy "%QT_DIR%\bin\icudt*.dll" "%OUTPUT_DIR%"
-  rem copy "%QT_DIR%\bin\icuin*.dll" "%OUTPUT_DIR%"
-  rem copy "%QT_DIR%\bin\icuuc*.dll" "%OUTPUT_DIR%"
-  copy "%QT_DIR%\bin\libgcc_s_seh-1.dll" %OUTPUT_DIR%
-) else (
-  copy %QT_DIR%\bin\QtCore4.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\QtGui4.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\QtNetwork4.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\QtXml4.dll %OUTPUT_DIR%
-  rem copy %QT_DIR%\bin\QtScript4.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\QtDBus4.dll %OUTPUT_DIR%
-  copy %QT_DIR%\bin\mingwm10.dll %OUTPUT_DIR%
-  if %QTVER% geq 4.6.0 (
-    copy %QT_DIR%\bin\libgcc_s_dw2-1.dll %OUTPUT_DIR%
-  )
-  if %QTVER% geq 4.8.0 (
-    copy %QT_DIR%\bin\libwinpthread-1.dll %OUTPUT_DIR%
-    copy "%QT_DIR%\bin\libstdc++-6.dll" %OUTPUT_DIR%
-  )
-)
+windeployqt %OUTPUT_DIR%\smplayer.exe
 
 if "%BUILD_ARCH%" == "x64" (
     if "%QTVER:~0,3%"=="5.6" (
@@ -96,23 +67,6 @@ if "%BUILD_ARCH%" == "x64" (
 	)
 )
 
-rem Qt Plugins
-mkdir "%OUTPUT_DIR%\imageformats"
-if %QTVER% lss 5.0.0 (
-
-  copy "%QT_DIR%\plugins\imageformats\qjpeg4.dll" "%OUTPUT_DIR%\imageformats\"
-
-) else if %QTVER% geq 5.0.0 (
-
-  mkdir "%OUTPUT_DIR%\platforms"
-  copy "%QT_DIR%\plugins\imageformats\qjpeg.dll" "%OUTPUT_DIR%\imageformats\"
-  copy "%QT_DIR%\plugins\imageformats\qgif.dll" "%OUTPUT_DIR%\imageformats\"
-  copy "%QT_DIR%\plugins\platforms\qwindows.dll" "%OUTPUT_DIR%\platforms\"
-
-  mkdir "%OUTPUT_DIR%\styles"
-  copy "%QT_DIR%\plugins\styles\*.dll" "%OUTPUT_DIR%\styles\"
-)
-
 echo.
 echo ######        Translations         #######
 echo.
@@ -120,13 +74,6 @@ echo.
 mkdir %OUTPUT_DIR%\translations
 copy %SMPLAYER_DIR%\src\translations\*.qm %OUTPUT_DIR%\translations
 rem copy %SMPLAYER_DIR%\qt-translations\*.qm %OUTPUT_DIR%\translations
-
-echo.
-echo ######       Qt Translations       #######
-echo.
-copy %QT_DIR%\translations\qt_*.qm %OUTPUT_DIR%\translations
-copy %QT_DIR%\translations\qtbase*.qm %OUTPUT_DIR%\translations
-del %OUTPUT_DIR%\translations\qt_help_*.qm
 
 echo.
 echo ######         Shortcuts           #######
@@ -137,7 +84,6 @@ copy %SMPLAYER_DIR%\src\shortcuts\*.keys %OUTPUT_DIR%\shortcuts
 echo.
 echo ######        Documentation        #######
 echo.
-rem svn export --force %SMPLAYER_DIR%\docs %OUTPUT_DIR%\docs
 xcopy %SMPLAYER_DIR%\docs %OUTPUT_DIR%\docs\ /E
 
 echo.
