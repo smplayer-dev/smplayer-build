@@ -49,7 +49,7 @@ rem copy %SMPLAYER_DIR%\zlib\zlib1.dll %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\*.txt %OUTPUT_DIR%
 copy %SMPLAYER_DIR%\webserver\simple_web_server.exe %OUTPUT_DIR%
 
-windeployqt %OUTPUT_DIR%\smplayer.exe
+windeployqt --no-angle --no-opengl-sw %OUTPUT_DIR%\smplayer.exe
 
 if "%BUILD_ARCH%" == "x64" (
     if "%QTVER:~0,3%"=="5.6" (
