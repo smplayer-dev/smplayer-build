@@ -11,7 +11,10 @@ jobs:
       
       - name: Install sources
         run: .\download_packages.cmd
-      
+
+      - name: Install mplayer and mpv
+        run: .\uncompress_players.cmd
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
@@ -36,7 +39,15 @@ jobs:
            .\nsis.cmd
            $filename = Get-Content packages\BUILD\installer_filename.txt -TotalCount 1
            echo "INSTALLERFILENAME=$filename" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        
+
+      - name: Rename package
+        shell: bash
+        run: |
+           installer=${{env.INSTALLERFILENAME}}
+           filename=${installer/.exe/-unsigned.exe}
+           mv packages/BUILD/output/$installer packages/BUILD/output/$filename
+           echo "INSTALLERFILENAME=$filename" >> $GITHUB_ENV
+
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
