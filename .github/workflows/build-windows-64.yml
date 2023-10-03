@@ -20,7 +20,8 @@ jobs:
         with:
           version: '5.15.2'
           arch: 'win64_mingw81'
-          tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
+          #tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
+          tools: 'tools_opensslv3_x64,3.0.11-1,qt.tools.opensslv3.win_x64'
           
       - name: Compile themes
         run: .\compile_themes.cmd
