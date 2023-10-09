@@ -32,6 +32,9 @@ jobs:
       - name: Install sources
         run: .\download_packages.cmd
 
+      - name: Install mplayer and mpv
+        run: .\uncompress_players.cmd
+
       - name: Install Qt (32 bit)
         if: ${{ matrix.config.arch == 'win32' }}
         uses: jurplel/install-qt-action@v2
