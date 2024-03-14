@@ -2,5 +2,5 @@
 
 set DIR=packages
 
-svn co https://github.com/smplayer-dev/smtube.git/trunk %DIR%\smtube
-svn co https://github.com/smplayer-dev/smtube.git/trunk %DIR%\smtube-portable
+git clone --depth=1 https://github.com/smplayer-dev/smtube.git %DIR%\smtube
+git clone --depth=1 https://github.com/smplayer-dev/smtube.git %DIR%\smtube-portable
