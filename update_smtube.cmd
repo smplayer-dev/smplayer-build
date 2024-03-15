@@ -4,11 +4,9 @@ set ROOT=packages
 set WD=%cd%
 
 cd %WD%\%ROOT%\smtube
-svn cleanup
-svn update
+git pull
 
 cd %WD%\%ROOT%\smtube-portable
-svn cleanup
-svn update
+git pull
 
 cd %WD%
