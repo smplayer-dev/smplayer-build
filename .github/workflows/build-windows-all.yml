@@ -43,7 +43,7 @@ jobs:
           arch: 'win32_mingw81'
           #tools: 'tools_mingw,8.1.0-1,qt.tools.win32_mingw810 tools_openssl_x86,1.1.1-1,qt.tools.openssl.win_x86'
           tools: 'tools_mingw,8.1.0-1,qt.tools.win32_mingw810'
-          aqtversion: '==1.2.5'
+          aqtversion: '==2.1.*'
 
       - name: Install Qt (64 bit)
         if: ${{ matrix.config.arch == 'x64' }}
@@ -53,7 +53,7 @@ jobs:
           arch: 'win64_mingw81'
           #tools: 'tools_openssl_x64,1.1.1-1,qt.tools.openssl.win_x64'
           tools: 'tools_mingw,8.1.0-1,qt.tools.win64_mingw810'
-          aqtversion: '==1.2.5'
+          aqtversion: '==2.1.*'
 
       - name: Set mingw32 path
         if: ${{ matrix.config.arch == 'win32' }}
