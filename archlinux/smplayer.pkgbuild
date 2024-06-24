@@ -5,12 +5,13 @@ pkgdesc='Media player with built-in codecs that can play virtually all video and
 url='http://www.smplayer.info/'
 arch=('x86_64')
 license=('GPL')
-depends=('mpv' 'hicolor-icon-theme' 'libx11' 'zlib' 'gcc-libs')
+depends=('glibc' 'qt5-base' 'qt5-declarative' 'mpv' 'libx11' 'zlib' 'gcc-libs' 'hicolor-icon-theme')
 makedepends=('qt5-tools')
 optdepends=('smplayer-themes: icon themes collection'
             'smplayer-skins: skin themes collection'
-            'smtube: browse and play youtube videos'
-            'youtube-dl: youtube videos and streaming'
+#            'smtube: browse and play youtube videos'
+#            'youtube-dl: youtube videos and streaming'
+            'yt-dlp: youtube videos and streaming'
             'mplayer: alternative multimedia engine')
 source=("$pkgname::git+https://github.com/smplayer-dev/smplayer.git")
 sha256sums=('SKIP')
